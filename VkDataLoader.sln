@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VkDataLoader", "VkDataLoader\VkDataLoader.csproj", "{0373084D-8CA1-4484-BFBE-23802E8883C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VkDataLoader.Console", "VkDataLoader.Console\VkDataLoader.Console.csproj", "{8C9EF8C9-F2D3-4037-AFEE-76576D140F5C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0373084D-8CA1-4484-BFBE-23802E8883C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0373084D-8CA1-4484-BFBE-23802E8883C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0373084D-8CA1-4484-BFBE-23802E8883C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0373084D-8CA1-4484-BFBE-23802E8883C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C9EF8C9-F2D3-4037-AFEE-76576D140F5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C9EF8C9-F2D3-4037-AFEE-76576D140F5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C9EF8C9-F2D3-4037-AFEE-76576D140F5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C9EF8C9-F2D3-4037-AFEE-76576D140F5C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {86A6D26F-7317-4243-B2EE-48C2893AC008}
+	EndGlobalSection
+EndGlobal
