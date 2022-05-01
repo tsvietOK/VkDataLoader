@@ -64,7 +64,8 @@ namespace VkDataLoader.App
 
         public VkDataProcessor DataProcessor
         {
-            get => dataProcessor; set
+            get => dataProcessor; 
+            set
             {
                 dataProcessor = value;
                 NotifyPropertyChanged(nameof(DataProcessor));
@@ -77,7 +78,8 @@ namespace VkDataLoader.App
 
         public string SelectedFolderPath
         {
-            get => selectedFolderPath; set
+            get => selectedFolderPath; 
+            set
             {
                 if (selectedFolderPath != value)
                 {
@@ -89,7 +91,8 @@ namespace VkDataLoader.App
 
         public bool IsVkFolder
         {
-            get => isVkFolder; set
+            get => isVkFolder; 
+            set
             {
                 if (isVkFolder != value)
                 {
@@ -113,7 +116,8 @@ namespace VkDataLoader.App
 
         public Symbol FolderStatus
         {
-            get => folderStatus; set
+            get => folderStatus;
+            set
             {
                 if (folderStatus != value)
                 {
@@ -125,7 +129,8 @@ namespace VkDataLoader.App
 
         public bool IsTipOpen
         {
-            get => isTipOpen; set
+            get => isTipOpen; 
+            set
             {
                 if (isTipOpen != value)
                 {
@@ -137,7 +142,8 @@ namespace VkDataLoader.App
 
         public bool IsParseLinksButtonEnabled
         {
-            get => isParseLinksButtonEnabled; set
+            get => isParseLinksButtonEnabled; 
+            set
             {
                 if (isParseLinksButtonEnabled != value)
                 {
@@ -150,7 +156,8 @@ namespace VkDataLoader.App
 
         public bool IsSelectFolderButtonEnabled
         {
-            get => isSelectFolderButtonEnabled; set
+            get => isSelectFolderButtonEnabled; 
+            set
             {
                 if (isSelectFolderButtonEnabled != value)
                 {
@@ -162,7 +169,8 @@ namespace VkDataLoader.App
 
         public bool IsParserInProgress
         {
-            get => isParserInProgress; set
+            get => isParserInProgress; 
+            set
             {
                 if (isParserInProgress != value)
                 {
