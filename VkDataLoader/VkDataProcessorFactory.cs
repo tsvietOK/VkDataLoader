@@ -8,7 +8,7 @@ namespace VkDataLoader
     {
         public static VkDataProcessor GetVkDataProcessor(string folderPath)
         {
-
+            throw new NotImplementedException();
         }
     }
 }
