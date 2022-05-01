@@ -10,10 +10,13 @@ namespace VkDataLoader.Console
         [Option(Description = "Path to the 'messages' folder.")]
         public string MessageFolderPath { get; } = @"C:\Users\tsvet\Downloads\Archive\messages";
 
+        [Option(Description = "What you want to download.")]
+        public string ItemsToLoad { get; } = "images";
+
         private void OnExecute()
         {
-            VkData data = new(MessageFolderPath);
-            data.Load();
+            VkDataProcessor data = new(MessageFolderPath);
+            data.ParseItems(ItemsToLoad);
         }
     }
 
