@@ -50,7 +50,7 @@ namespace VkDataLoader.App
                 if (folder != null)
                 {
                     SelectedFolderPath = folder.Path;
-                    IsVkFolder = await DoesFileExistAsync(folder, "index.html");
+                    IsVkFolder = System.IO.File.Exists(System.IO.Path.Combine(folder.Path, "index.html"));
                 }
             });
 
@@ -173,18 +173,7 @@ namespace VkDataLoader.App
                 }
             }
         }
-        static async Task<bool> DoesFileExistAsync(StorageFolder folder, string fileName)
-        {
-            try
-            {
-                await folder.GetFileAsync(fileName);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
