@@ -10,16 +10,31 @@ namespace VkDataLoader
 {
     public class VkDataProcessor
     {
-        public LinksParser Parser { get; set; }
+        private readonly VkDataProcessorFactory vkDataProcessorFactory;
 
-        internal VkDataProcessor(string vkFolderPath)
+        internal VkDataProcessor(LinksParser parser, string vkFolderPath, VkDataProcessorFactory processorFactory) : this(processorFactory)
+        {
+            Parser = parser;
+            Parser.SetFolderPath(vkFolderPath);
+        }
+
+        internal VkDataProcessor(string vkFolderPath, VkDataProcessorFactory processorFactory) : this(processorFactory)
         {
             Parser = new(vkFolderPath);
         }
 
-        public async Task ParseItems(string itemsToLoad)
+        private VkDataProcessor(VkDataProcessorFactory processorFactory)
         {
+            vkDataProcessorFactory = processorFactory;
+        }
+
+        public LinksParser Parser { get; set; }
+
+        public async Task ParseItems(List<string> itemsToLoad)
+        {
+            Parser.Reset();
             await Parser.ParseAsync(itemsToLoad);
+            vkDataProcessorFactory.SaveConfiguration();
         }
     }
 }

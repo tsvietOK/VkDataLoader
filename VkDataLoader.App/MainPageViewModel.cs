@@ -59,19 +59,31 @@ namespace VkDataLoader.App
                     SelectedFolderPath = folder.Path;
                     processorFactory = new VkDataProcessorFactory(SelectedFolderPath);
                     IsVkFolder = processorFactory.IsVkFolder;
+                    DataProcessor = processorFactory.GetVkDataProcessor();
+                    IsImagesCheckBoxChecked = DataProcessor.Parser.IsImagesEnabled;
+                    IsDocumentsCheckBoxChecked = DataProcessor.Parser.IsDocumentsEnabled;
                 }
             });
 
             ParseLinksCommand = new RelayCommand(async () =>
             {
-                DataProcessor = processorFactory.GetVkDataProcessor();
                 if (DataProcessor is null)
                 {
                     return;
                 }
 
                 IsParserInProgress = true;
-                await DataProcessor.ParseItems("images");
+                List<string> itemsToLoad = new();
+                if (IsImagesCheckBoxChecked)
+                {
+                    itemsToLoad.Add("images");
+                }
+                //not supported
+                //if (IsDocumentsCheckBoxChecked)
+                //{
+                //    itemsToLoad.Add("documents");
+                //}
+                await DataProcessor.ParseItems(itemsToLoad);
                 IsParserInProgress = false;
             });
         }
@@ -140,6 +152,7 @@ namespace VkDataLoader.App
             {
                 SetProperty(ref isImagesCheckBoxChecked, value);
                 CheckAtLeastOneCheckBoxChecked();
+                DataProcessor.Parser.IsImagesEnabled = value;
             }
         }
 
@@ -156,6 +169,7 @@ namespace VkDataLoader.App
             {
                 SetProperty(ref isDocumentsCheckBoxChecked, value);
                 CheckAtLeastOneCheckBoxChecked();
+                DataProcessor.Parser.IsDocumentsEnabled = value;
             }
         }
 

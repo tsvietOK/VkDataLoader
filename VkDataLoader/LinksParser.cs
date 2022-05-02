@@ -16,11 +16,13 @@ namespace VkDataLoader
 {
     public class LinksParser : ObservableObject
     {
-        private readonly string vkFolderPath;
+        private string vkFolderPath;
         private ObservableCollection<VkDataItem> vkDataItems = new();
         private ObservableCollection<string> htmlFilesList = new();
         private int htmlFilesCount;
         private int currentHtmlFileNumber;
+        private bool isImagesEnabled;
+        private bool isDocumentsEnabled;
 
         public LinksParser(string vkFolderPath)
         {
@@ -32,8 +34,19 @@ namespace VkDataLoader
             get => vkDataItems; private set
             {
                 SetProperty(ref vkDataItems, value);
-                //string jsonVkItems = JsonConvert.SerializeObject(vkDataItems);
             }
+        }
+
+        public bool IsImagesEnabled
+        {
+            get => isImagesEnabled;
+            set => SetProperty(ref isImagesEnabled, value);
+        }
+
+        public bool IsDocumentsEnabled
+        {
+            get => isDocumentsEnabled;
+            set => SetProperty(ref isDocumentsEnabled, value);
         }
 
         public int HtmlFilesCount
@@ -58,25 +71,41 @@ namespace VkDataLoader
             }
         }
 
-        public async Task ParseAsync(string itemsToLoad)
+        public async Task ParseAsync(List<string> itemsToLoad)
         {
-            ILinkParser? parser = itemsToLoad switch
+            foreach (var item in itemsToLoad)
             {
-                "images" => new ImageLinkParser(),
-                //"documents" => new DocumentLinkParser(),
-                _ => new ImageLinkParser(),
-            };
+                ILinkParser? parser = item switch
+                {
+                    "images" => new ImageLinkParser(),
+                    // not supported
+                    //"documents" => new DocumentLinkParser(),
+                    _ => new ImageLinkParser(),
+                };
 
-            HtmlFilesList = parser.GetHtmlFilesList(vkFolderPath);
-            for (int i = 0; i < HtmlFilesList.Count; i++)
-            {
-                CurrentHtmlFileNumber = i;
-                string file = HtmlFilesList[i];
-                //Console.WriteLine($"Processing file:{file}");
-                using var reader = File.OpenText(file);
-                var text = await reader.ReadToEndAsync();
-                parser.GetLinksFromHtml(VkDataItems, text);
+                HtmlFilesList = parser.GetHtmlFilesList(vkFolderPath);
+                for (int i = 0; i < HtmlFilesList.Count; i++)
+                {
+                    CurrentHtmlFileNumber = i;
+                    string file = HtmlFilesList[i];
+                    using var reader = File.OpenText(file);
+                    var text = await reader.ReadToEndAsync();
+                    parser.GetLinksFromHtml(VkDataItems, text);
+                }
             }
+        }
+
+        public void SetFolderPath(string path)
+        {
+            vkFolderPath = path;
+        }
+
+        public void Reset()
+        {
+            HtmlFilesCount = 0;
+            CurrentHtmlFileNumber = 0;
+            HtmlFilesList?.Clear();
+            VkDataItems?.Clear();
         }
     }
 }
