@@ -43,12 +43,13 @@ namespace VkDataLoader
         {
             if (File.Exists(configFilePath))
             {
-                using var reader = File.OpenText(configFilePath);
-                string config = await reader.ReadToEndAsync();
+                using var stream = File.OpenText(configFilePath);
+                using var reader = new JsonTextReader(stream);
                 LinksParser? linksParser;
                 try
                 {
-                    linksParser = JsonConvert.DeserializeObject<LinksParser>(config);
+                    var convert = new JsonSerializer();
+                    linksParser = convert.Deserialize<LinksParser>(reader);
                 }
                 catch (Exception)
                 {
