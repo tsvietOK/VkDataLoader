@@ -1,5 +1,6 @@
 ﻿using HtmlAgilityPack;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -23,6 +24,8 @@ namespace VkDataLoader
         private int currentHtmlFileNumber;
         private bool isImagesEnabled;
         private bool isDocumentsEnabled;
+        private bool isImagesSupported = true;
+        private bool isDocumentsSupported;
 
         public LinksParser(string vkFolderPath)
         {
@@ -43,10 +46,24 @@ namespace VkDataLoader
             set => SetProperty(ref isImagesEnabled, value);
         }
 
+        [JsonIgnore]
+        public bool IsImagesSupported
+        {
+            get => isImagesSupported;
+            set => SetProperty(ref isImagesSupported, value);
+        }
+
         public bool IsDocumentsEnabled
         {
             get => isDocumentsEnabled;
             set => SetProperty(ref isDocumentsEnabled, value);
+        }
+
+        [JsonIgnore]
+        public bool IsDocumentsSupported
+        {
+            get => isDocumentsSupported;
+            set => SetProperty(ref isDocumentsSupported, value);
         }
 
         public int HtmlFilesCount
@@ -78,8 +95,7 @@ namespace VkDataLoader
                 ILinkParser? parser = item switch
                 {
                     "images" => new ImageLinkParser(),
-                    // not supported
-                    //"documents" => new DocumentLinkParser(),
+                    "documents" => new DocumentLinkParser(),
                     _ => new ImageLinkParser(),
                 };
 

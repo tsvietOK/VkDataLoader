@@ -7,11 +7,16 @@ using VkDataLoader.Models;
 
 namespace VkDataLoader.Parsers
 {
-    internal class DocumentLinkParser
+    internal class DocumentLinkParser : ILinkParser
     {
-        //async Task GetLinksFromHtml(ObservableCollection<VkDataItem> vkDataItems, string html)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public ObservableCollection<string> GetHtmlFilesList(string vkFolderPath)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void GetLinksFromHtml(ObservableCollection<VkDataItem> vkDataItems, string html)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

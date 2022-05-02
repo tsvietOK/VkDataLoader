@@ -60,8 +60,12 @@ namespace VkDataLoader.App
                     processorFactory = new VkDataProcessorFactory(SelectedFolderPath);
                     IsVkFolder = processorFactory.IsVkFolder;
                     DataProcessor = processorFactory.GetVkDataProcessor();
+
                     IsImagesCheckBoxChecked = DataProcessor.Parser.IsImagesEnabled;
+                    IsImagesCheckBoxEnabled = DataProcessor.Parser.IsImagesSupported;
+
                     IsDocumentsCheckBoxChecked = DataProcessor.Parser.IsDocumentsEnabled;
+                    IsDocumentsCheckBoxEnabled = DataProcessor.Parser.IsDocumentsSupported;
                 }
             });
 
@@ -78,11 +82,10 @@ namespace VkDataLoader.App
                 {
                     itemsToLoad.Add("images");
                 }
-                //not supported
-                //if (IsDocumentsCheckBoxChecked)
-                //{
-                //    itemsToLoad.Add("documents");
-                //}
+                if (IsDocumentsCheckBoxChecked)
+                {
+                    itemsToLoad.Add("documents");
+                }
                 await DataProcessor.ParseItems(itemsToLoad);
                 IsParserInProgress = false;
             });
