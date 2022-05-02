@@ -41,6 +41,8 @@ namespace VkDataLoader.App
         private bool isParserInProgress;
         private bool isImagesCheckBoxEnabled;
         private bool isDocumentsCheckBoxEnabled;
+        private bool isImagesCheckBoxChecked;
+        private bool isDocumentsCheckBoxChecked;
 
         public MainPageViewModel()
         {
@@ -103,6 +105,7 @@ namespace VkDataLoader.App
                     IsParseLinksButtonEnabled = true;
                     IsSelectFolderButtonEnabled = false;
                     ChangeAllCheckBoxesIsEnabled(true);
+                    CheckAtLeastOneCheckBoxChecked();
                 }
                 else
                 {
@@ -130,10 +133,30 @@ namespace VkDataLoader.App
             set => SetProperty(ref isImagesCheckBoxEnabled, value);
         }
 
+        public bool IsImagesCheckBoxChecked
+        {
+            get => isImagesCheckBoxChecked;
+            set
+            {
+                SetProperty(ref isImagesCheckBoxChecked, value);
+                CheckAtLeastOneCheckBoxChecked();
+            }
+        }
+
         public bool IsDocumentsCheckBoxEnabled
         {
             get => isDocumentsCheckBoxEnabled;
             set => SetProperty(ref isDocumentsCheckBoxEnabled, value);
+        }
+
+        public bool IsDocumentsCheckBoxChecked
+        {
+            get => isDocumentsCheckBoxChecked;
+            set
+            {
+                SetProperty(ref isDocumentsCheckBoxChecked, value);
+                CheckAtLeastOneCheckBoxChecked();
+            }
         }
 
         public bool IsParseLinksButtonEnabled
@@ -159,11 +182,16 @@ namespace VkDataLoader.App
             }
         }
 
-        public void ChangeAllCheckBoxesIsEnabled(bool state)
+        public void ChangeAllCheckBoxesIsEnabled(bool enabled)
         {
-            IsImagesCheckBoxEnabled = state;
+            IsImagesCheckBoxEnabled = enabled;
             // not supported
             //IsDocumentsCheckBoxEnabled = state;
+        }
+
+        public void CheckAtLeastOneCheckBoxChecked()
+        {
+            IsParseLinksButtonEnabled = IsImagesCheckBoxChecked || IsDocumentsCheckBoxChecked;
         }
     }
 }

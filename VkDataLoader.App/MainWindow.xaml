@@ -116,14 +116,14 @@
                     Margin="10,10"
                     HorizontalAlignment="Stretch"
                     Content="Images"
-                    IsChecked="True"
+                    IsChecked="{x:Bind ViewModel.IsImagesCheckBoxChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     IsEnabled="{x:Bind ViewModel.IsImagesCheckBoxEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <CheckBox
                     x:Name="DocumentsCheckbox"
                     Margin="10,10"
                     HorizontalAlignment="Stretch"
                     Content="Documents"
-                    IsChecked="False"
+                    IsChecked="{x:Bind ViewModel.IsDocumentsCheckBoxChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     IsEnabled="{x:Bind ViewModel.IsDocumentsCheckBoxEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
             <TextBlock
