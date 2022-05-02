@@ -57,6 +57,8 @@ namespace VkDataLoader.App
 
             ParseLinksCommand = new RelayCommand(async () =>
             {
+                DataProcessor = new VkDataProcessor(SelectedFolderPath);
+
                 IsParserInProgress = true;
                 await DataProcessor.ParseItems("images");
                 IsParserInProgress = false;
@@ -105,7 +107,6 @@ namespace VkDataLoader.App
                     FolderStatus = Symbol.Accept;
                     IsParseLinksButtonEnabled = true;
                     IsSelectFolderButtonEnabled = false;
-                    DataProcessor = new VkDataProcessor(SelectedFolderPath);
                 }
                 else
                 {
