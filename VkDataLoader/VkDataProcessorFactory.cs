@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace VkDataLoader
 {
@@ -17,7 +18,7 @@ namespace VkDataLoader
         {
             configFilePath = Path.Combine(folderPath, configFileName);
             IsVkFolder = File.Exists(Path.Combine(folderPath, "index.html"));
-            if (!TryLoadConfiguration(folderPath))
+            if (!TryLoadConfigurationAsync(folderPath).GetAwaiter().GetResult())
             {
                 dataProcessor = IsVkFolder ? new VkDataProcessor(folderPath, this) : null;
             }
@@ -38,11 +39,12 @@ namespace VkDataLoader
             serializer.Serialize(writer, dataProcessor?.Parser);
         }
 
-        public bool TryLoadConfiguration(string folderPath)
+        public async Task<bool> TryLoadConfigurationAsync(string folderPath)
         {
             if (File.Exists(configFilePath))
             {
-                string config = File.ReadAllText(configFilePath);
+                using var reader = File.OpenText(configFilePath);
+                string config = await reader.ReadToEndAsync();
                 LinksParser? linksParser;
                 try
                 {
