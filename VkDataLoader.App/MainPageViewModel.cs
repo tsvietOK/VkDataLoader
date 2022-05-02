@@ -39,6 +39,8 @@ namespace VkDataLoader.App
         private VkDataProcessor dataProcessor;
         private bool isSelectFolderButtonEnabled = true;
         private bool isParserInProgress;
+        private bool isImagesCheckBoxEnabled;
+        private bool isDocumentsCheckBoxEnabled;
 
         public MainPageViewModel()
         {
@@ -100,6 +102,7 @@ namespace VkDataLoader.App
                     FolderStatus = Symbol.Accept;
                     IsParseLinksButtonEnabled = true;
                     IsSelectFolderButtonEnabled = false;
+                    ChangeAllCheckBoxesIsEnabled(true);
                 }
                 else
                 {
@@ -121,6 +124,18 @@ namespace VkDataLoader.App
             set => SetProperty(ref isTipOpen, value);
         }
 
+        public bool IsImagesCheckBoxEnabled
+        {
+            get => isImagesCheckBoxEnabled;
+            set => SetProperty(ref isImagesCheckBoxEnabled, value);
+        }
+
+        public bool IsDocumentsCheckBoxEnabled
+        {
+            get => isDocumentsCheckBoxEnabled;
+            set => SetProperty(ref isDocumentsCheckBoxEnabled, value);
+        }
+
         public bool IsParseLinksButtonEnabled
         {
             get => isParseLinksButtonEnabled;
@@ -140,7 +155,15 @@ namespace VkDataLoader.App
             {
                 SetProperty(ref isParserInProgress, value);
                 IsParseLinksButtonEnabled = !isParserInProgress;
+                ChangeAllCheckBoxesIsEnabled(!isParserInProgress);
             }
+        }
+
+        public void ChangeAllCheckBoxesIsEnabled(bool state)
+        {
+            IsImagesCheckBoxEnabled = state;
+            // not supported
+            //IsDocumentsCheckBoxEnabled = state;
         }
     }
 }
