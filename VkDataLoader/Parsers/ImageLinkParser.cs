@@ -18,23 +18,20 @@ namespace VkDataLoader.Parsers
             htmlSnippet.LoadHtml(html);
 
             //List<VkDataItem> hrefTags = new();
-            string xpathExpression = $"//div[@class='attachment']/a[@class='attachment__link']";
-            if (htmlSnippet.DocumentNode.SelectNodes(xpathExpression) != null)
+            string xpathExpression = $"//div[@class='attachment']/a[@class='attachment__link' and contains(@href,'userapi')]";
+            var nodes = htmlSnippet.DocumentNode.SelectNodes(xpathExpression);
+            if (nodes?.Count > 0)
             {
-                foreach (HtmlNode link in htmlSnippet.DocumentNode.SelectNodes(xpathExpression))
+                foreach (HtmlNode link in nodes)
                 {
-                    HtmlAttribute att = link.Attributes["href"];
-                    var href = att.Value;
-                    if (href.Contains("userapi"))
+                    var href = link.Attributes["href"].Value;
+                    var dataItem = new VkDataItem
                     {
-                        var dataItem = new VkDataItem
-                        {
-                            Url = att.Value,
-                            DataType = VkDataType.Image
-                        };
+                        Url = href,
+                        DataType = VkDataType.Image
+                    };
 
-                        vkDataItems.Add(dataItem);
-                    }
+                    vkDataItems.Add(dataItem);
                 }
             }
         }
