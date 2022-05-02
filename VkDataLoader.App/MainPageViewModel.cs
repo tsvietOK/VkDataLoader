@@ -60,7 +60,7 @@ namespace VkDataLoader.App
 
             ParseLinksCommand = new RelayCommand(async () =>
             {
-                DataProcessor = processorFactory.GetVkDataProcessor(SelectedFolderPath);
+                DataProcessor = processorFactory.GetVkDataProcessor();
                 if (DataProcessor is null)
                 {
                     return;

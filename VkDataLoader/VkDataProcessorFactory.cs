@@ -7,16 +7,16 @@ namespace VkDataLoader
 {
     public class VkDataProcessorFactory
     {
-        public bool IsVkFolder { get; set; }
+        private readonly VkDataProcessor? dataProcessor;
 
         public VkDataProcessorFactory(string folderPath)
         {
             IsVkFolder = File.Exists(Path.Combine(folderPath, "index.html"));
+            dataProcessor = IsVkFolder ? new VkDataProcessor(folderPath) : null;
         }
 
-        public VkDataProcessor? GetVkDataProcessor(string folderPath)
-        {
-            return IsVkFolder ? new VkDataProcessor(folderPath) : null;
-        }
+        public bool IsVkFolder { get; set; }
+
+        public VkDataProcessor? GetVkDataProcessor() => dataProcessor;
     }
 }
