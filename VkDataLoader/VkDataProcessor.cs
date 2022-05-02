@@ -12,7 +12,7 @@ namespace VkDataLoader
     {
         public LinksParser Parser { get; set; }
 
-        public VkDataProcessor(string vkFolderPath)
+        internal VkDataProcessor(string vkFolderPath)
         {
             Parser = new(vkFolderPath);
         }

@@ -34,6 +34,7 @@ namespace VkDataLoader.App
         private Symbol folderStatus;
         private bool isTipOpen;
         private bool isParseLinksButtonEnabled;
+        private VkDataProcessorFactory processorFactory;
         private VkDataProcessor dataProcessor;
         private bool isSelectFolderButtonEnabled = true;
         private bool isParserInProgress;
@@ -51,13 +52,18 @@ namespace VkDataLoader.App
                 if (folder != null)
                 {
                     SelectedFolderPath = folder.Path;
-                    IsVkFolder = File.Exists(Path.Combine(folder.Path, "index.html"));
+                    processorFactory = new VkDataProcessorFactory(SelectedFolderPath);
+                    IsVkFolder = processorFactory.IsVkFolder;
                 }
             });
 
             ParseLinksCommand = new RelayCommand(async () =>
             {
-                DataProcessor = new VkDataProcessor(SelectedFolderPath);
+                DataProcessor = processorFactory.GetVkDataProcessor(SelectedFolderPath);
+                if (DataProcessor is null)
+                {
+                    return;
+                }
 
                 IsParserInProgress = true;
                 await DataProcessor.ParseItems("images");
@@ -67,7 +73,7 @@ namespace VkDataLoader.App
 
         public VkDataProcessor DataProcessor
         {
-            get => dataProcessor; 
+            get => dataProcessor;
             set
             {
                 dataProcessor = value;
@@ -81,7 +87,7 @@ namespace VkDataLoader.App
 
         public string SelectedFolderPath
         {
-            get => selectedFolderPath; 
+            get => selectedFolderPath;
             set
             {
                 if (selectedFolderPath != value)
@@ -94,7 +100,7 @@ namespace VkDataLoader.App
 
         public bool IsVkFolder
         {
-            get => isVkFolder; 
+            get => isVkFolder;
             set
             {
                 if (isVkFolder != value)
@@ -131,7 +137,7 @@ namespace VkDataLoader.App
 
         public bool IsTipOpen
         {
-            get => isTipOpen; 
+            get => isTipOpen;
             set
             {
                 if (isTipOpen != value)
@@ -144,7 +150,7 @@ namespace VkDataLoader.App
 
         public bool IsParseLinksButtonEnabled
         {
-            get => isParseLinksButtonEnabled; 
+            get => isParseLinksButtonEnabled;
             set
             {
                 if (isParseLinksButtonEnabled != value)
@@ -158,7 +164,7 @@ namespace VkDataLoader.App
 
         public bool IsSelectFolderButtonEnabled
         {
-            get => isSelectFolderButtonEnabled; 
+            get => isSelectFolderButtonEnabled;
             set
             {
                 if (isSelectFolderButtonEnabled != value)
@@ -171,7 +177,7 @@ namespace VkDataLoader.App
 
         public bool IsParserInProgress
         {
-            get => isParserInProgress; 
+            get => isParserInProgress;
             set
             {
                 if (isParserInProgress != value)
