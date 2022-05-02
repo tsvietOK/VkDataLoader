@@ -1,12 +1,4 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
-using VkDataLoader.Models;
-
-namespace VkDataLoader
+﻿namespace VkDataLoader
 {
     public class VkDataProcessor
     {

@@ -1,17 +1,8 @@
-﻿using HtmlAgilityPack;
-using Microsoft.Toolkit.Mvvm.ComponentModel;
+﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Newtonsoft.Json;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using VkDataLoader.Models;
 using VkDataLoader.Parsers;
-using Windows.Storage;
-using Windows.Storage.Search;
 
 namespace VkDataLoader
 {

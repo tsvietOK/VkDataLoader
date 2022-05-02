@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using VkDataLoader.Enums;
+﻿using VkDataLoader.Enums;
 
 namespace VkDataLoader.Models
 {
