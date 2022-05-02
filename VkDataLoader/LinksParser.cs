@@ -1,4 +1,5 @@
 ﻿using HtmlAgilityPack;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -13,7 +14,7 @@ using Windows.Storage.Search;
 
 namespace VkDataLoader
 {
-    public class LinksParser : INotifyPropertyChanged
+    public class LinksParser : ObservableObject
     {
         private readonly string vkFolderPath;
         private ObservableCollection<VkDataItem> vkDataItems = new();
@@ -30,42 +31,29 @@ namespace VkDataLoader
         {
             get => vkDataItems; private set
             {
-                vkDataItems = value;
-                NotifyPropertyChanged(nameof(VkDataItems));
+                SetProperty(ref vkDataItems, value);
                 //string jsonVkItems = JsonConvert.SerializeObject(vkDataItems);
             }
         }
 
         public int HtmlFilesCount
         {
-            get => htmlFilesCount; set
-            {
-                if (htmlFilesCount != value)
-                {
-                    htmlFilesCount = value;
-                    NotifyPropertyChanged(nameof(HtmlFilesCount));
-                }
-            }
+            get => htmlFilesCount;
+            set => SetProperty(ref htmlFilesCount, value);
         }
 
         public int CurrentHtmlFileNumber
         {
-            get => currentHtmlFileNumber; set
-            {
-                if (currentHtmlFileNumber != value)
-                {
-                    currentHtmlFileNumber = value;
-                    NotifyPropertyChanged(nameof(CurrentHtmlFileNumber));
-                }
-            }
+            get => currentHtmlFileNumber;
+            set => SetProperty(ref currentHtmlFileNumber, value);
         }
 
         public ObservableCollection<string> HtmlFilesList
         {
-            get => htmlFilesList; private set
+            get => htmlFilesList;
+            private set
             {
-                htmlFilesList = value;
-                NotifyPropertyChanged(nameof(HtmlFilesList));
+                SetProperty(ref htmlFilesList, value);
                 HtmlFilesCount = htmlFilesList.Count;
             }
         }
@@ -89,13 +77,6 @@ namespace VkDataLoader
                 var text = await reader.ReadToEndAsync();
                 parser.GetLinksFromHtml(VkDataItems, text);
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

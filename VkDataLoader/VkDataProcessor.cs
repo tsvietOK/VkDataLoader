@@ -8,7 +8,7 @@ using VkDataLoader.Models;
 
 namespace VkDataLoader
 {
-    public class VkDataProcessor : INotifyPropertyChanged
+    public class VkDataProcessor
     {
         public LinksParser Parser { get; set; }
 
@@ -20,13 +20,6 @@ namespace VkDataLoader
         public async Task ParseItems(string itemsToLoad)
         {
             await Parser.ParseAsync(itemsToLoad);
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

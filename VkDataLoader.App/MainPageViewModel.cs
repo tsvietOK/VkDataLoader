@@ -1,3 +1,4 @@
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using Microsoft.UI.Xaml.Controls;
 using System;
@@ -27,7 +28,7 @@ namespace VkDataLoader.App
         void Initialize(IntPtr hwnd);
     }
 
-    internal class MainPageViewModel : INotifyPropertyChanged
+    internal class MainPageViewModel : ObservableObject
     {
         private string selectedFolderPath;
         private bool isVkFolder;
@@ -74,11 +75,7 @@ namespace VkDataLoader.App
         public VkDataProcessor DataProcessor
         {
             get => dataProcessor;
-            set
-            {
-                dataProcessor = value;
-                NotifyPropertyChanged(nameof(DataProcessor));
-            }
+            set => SetProperty(ref dataProcessor, value);
         }
 
         public RelayCommand SelectFolderCommand { get; set; }
@@ -88,14 +85,7 @@ namespace VkDataLoader.App
         public string SelectedFolderPath
         {
             get => selectedFolderPath;
-            set
-            {
-                if (selectedFolderPath != value)
-                {
-                    selectedFolderPath = value;
-                    NotifyPropertyChanged(nameof(SelectedFolderPath));
-                }
-            }
+            set => SetProperty(ref selectedFolderPath, value);
         }
 
         public bool IsVkFolder
@@ -103,11 +93,8 @@ namespace VkDataLoader.App
             get => isVkFolder;
             set
             {
-                if (isVkFolder != value)
-                {
-                    isVkFolder = value;
-                    NotifyPropertyChanged(nameof(IsVkFolder));
-                }
+                SetProperty(ref isVkFolder, value);
+
                 if (isVkFolder)
                 {
                     FolderStatus = Symbol.Accept;
@@ -125,54 +112,25 @@ namespace VkDataLoader.App
         public Symbol FolderStatus
         {
             get => folderStatus;
-            set
-            {
-                if (folderStatus != value)
-                {
-                    folderStatus = value;
-                    NotifyPropertyChanged(nameof(FolderStatus));
-                }
-            }
+            set => SetProperty(ref folderStatus, value);
         }
 
         public bool IsTipOpen
         {
             get => isTipOpen;
-            set
-            {
-                if (isTipOpen != value)
-                {
-                    isTipOpen = value;
-                    NotifyPropertyChanged(nameof(IsTipOpen));
-                }
-            }
+            set => SetProperty(ref isTipOpen, value);
         }
 
         public bool IsParseLinksButtonEnabled
         {
             get => isParseLinksButtonEnabled;
-            set
-            {
-                if (isParseLinksButtonEnabled != value)
-                {
-                    isParseLinksButtonEnabled = value;
-                    NotifyPropertyChanged(nameof(IsParseLinksButtonEnabled));
-                }
-
-            }
+            set => SetProperty(ref isParseLinksButtonEnabled, value);
         }
 
         public bool IsSelectFolderButtonEnabled
         {
             get => isSelectFolderButtonEnabled;
-            set
-            {
-                if (isSelectFolderButtonEnabled != value)
-                {
-                    isSelectFolderButtonEnabled = value;
-                    NotifyPropertyChanged(nameof(IsSelectFolderButtonEnabled));
-                }
-            }
+            set => SetProperty(ref isSelectFolderButtonEnabled, value);
         }
 
         public bool IsParserInProgress
@@ -180,22 +138,9 @@ namespace VkDataLoader.App
             get => isParserInProgress;
             set
             {
-                if (isParserInProgress != value)
-                {
-                    isParserInProgress = value;
-                    NotifyPropertyChanged(nameof(IsParserInProgress));
-
-                    IsParseLinksButtonEnabled = !isParserInProgress;
-                }
+                SetProperty(ref isParserInProgress, value);
+                IsParseLinksButtonEnabled = !isParserInProgress;
             }
-        }
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
