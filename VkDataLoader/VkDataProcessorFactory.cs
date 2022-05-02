@@ -18,7 +18,7 @@ namespace VkDataLoader
         {
             configFilePath = Path.Combine(folderPath, configFileName);
             IsVkFolder = File.Exists(Path.Combine(folderPath, "index.html"));
-            if (!TryLoadConfigurationAsync(folderPath).GetAwaiter().GetResult())
+            if (!TryLoadConfiguration(folderPath))
             {
                 dataProcessor = IsVkFolder ? new VkDataProcessor(folderPath, this) : null;
             }
@@ -39,7 +39,7 @@ namespace VkDataLoader
             serializer.Serialize(writer, dataProcessor?.Parser);
         }
 
-        public async Task<bool> TryLoadConfigurationAsync(string folderPath)
+        public bool TryLoadConfiguration(string folderPath)
         {
             if (File.Exists(configFilePath))
             {
