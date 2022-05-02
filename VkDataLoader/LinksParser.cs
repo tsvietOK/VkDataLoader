@@ -15,15 +15,15 @@ namespace VkDataLoader
 {
     public class LinksParser : INotifyPropertyChanged
     {
-        private readonly string messageFolderPath;
+        private readonly string vkFolderPath;
         private ObservableCollection<VkDataItem> vkDataItems = new();
         private ObservableCollection<string> htmlFilesList = new();
         private int htmlFilesCount;
         private int currentHtmlFileNumber;
 
-        public LinksParser(string messageFolderPath)
+        public LinksParser(string vkFolderPath)
         {
-            this.messageFolderPath = messageFolderPath;
+            this.vkFolderPath = vkFolderPath;
         }
 
         public ObservableCollection<VkDataItem> VkDataItems
@@ -69,15 +69,17 @@ namespace VkDataLoader
                 HtmlFilesCount = htmlFilesList.Count;
             }
         }
+
         public async Task ParseAsync(string itemsToLoad)
         {
-            HtmlFilesList = new ObservableCollection<string>(Directory.EnumerateFiles(messageFolderPath, "*.html", SearchOption.AllDirectories).ToList());
             ILinkParser? parser = itemsToLoad switch
             {
                 "images" => new ImageLinkParser(),
                 //"documents" => new DocumentLinkParser(),
                 _ => new ImageLinkParser(),
             };
+
+            HtmlFilesList = parser.GetHtmlFilesList(vkFolderPath);
             for (int i = 0; i < HtmlFilesList.Count; i++)
             {
                 CurrentHtmlFileNumber = i;

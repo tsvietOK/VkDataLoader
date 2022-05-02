@@ -12,9 +12,9 @@ namespace VkDataLoader
     {
         public LinksParser Parser { get; set; }
 
-        public VkDataProcessor(string messageFolderPath)
+        public VkDataProcessor(string vkFolderPath)
         {
-            Parser = new(messageFolderPath);
+            Parser = new(vkFolderPath);
         }
 
         public async Task ParseItems(string itemsToLoad)

@@ -1,7 +1,8 @@
-﻿using HtmlAgilityPack;
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,16 @@ namespace VkDataLoader.Parsers
 {
     internal class ImageLinkParser : ILinkParser
     {
+        public ImageLinkParser()
+        {
+        }
+
+        public ObservableCollection<string> GetHtmlFilesList(string vkFolderPath)
+        {
+            string messageFolderPath = Path.Combine(vkFolderPath, "messages");
+            return new ObservableCollection<string>(Directory.EnumerateFiles(messageFolderPath, "*.html", SearchOption.AllDirectories).ToList());
+        }
+
         public void GetLinksFromHtml(ObservableCollection<VkDataItem> vkDataItems, string html)
         {
             HtmlDocument htmlSnippet = new();
