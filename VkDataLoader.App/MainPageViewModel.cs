@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -50,7 +51,7 @@ namespace VkDataLoader.App
                 if (folder != null)
                 {
                     SelectedFolderPath = folder.Path;
-                    IsVkFolder = System.IO.File.Exists(System.IO.Path.Combine(folder.Path, "index.html"));
+                    IsVkFolder = File.Exists(Path.Combine(folder.Path, "index.html"));
                 }
             });
 
