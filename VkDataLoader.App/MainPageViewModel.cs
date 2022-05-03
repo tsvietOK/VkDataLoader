@@ -31,6 +31,7 @@ namespace VkDataLoader.App
         private bool isDocumentsCheckBoxEnabled;
         private bool isImagesCheckBoxChecked;
         private bool isDocumentsCheckBoxChecked;
+        private Symbol parseStatus;
 
         public MainPageViewModel()
         {
@@ -46,14 +47,32 @@ namespace VkDataLoader.App
                 {
                     SelectedFolderPath = folder.Path;
                     processorFactory = new VkDataProcessorFactory(SelectedFolderPath);
+
                     IsVkFolder = processorFactory.IsVkFolder;
                     DataProcessor = processorFactory.GetVkDataProcessor();
 
-                    IsImagesCheckBoxChecked = DataProcessor.Parser.IsImagesEnabled;
-                    IsImagesCheckBoxEnabled = DataProcessor.Parser.IsImagesSupported;
+                    if (processorFactory.IsConfigurationLoaded)
+                    {
+                        if (DataProcessor.Parser.IsParseSuccessful)
+                        {
+                            ParseStatusSymbol = Symbol.Accept;
+                            IsParseLinksButtonEnabled = false;
+                            ChangeAllCheckBoxesIsEnabled(false);
+                        }
+                        else
+                        {
+                            ParseStatusSymbol = Symbol.Cancel;
+                            IsParseLinksButtonEnabled = IsImagesCheckBoxChecked || IsDocumentsCheckBoxChecked;
+                        }
+                    }
+                    else
+                    {
+                        IsImagesCheckBoxChecked = DataProcessor.Parser.IsImagesEnabled;
+                        IsImagesCheckBoxEnabled = DataProcessor.Parser.IsImagesSupported && !DataProcessor.Parser.IsParseSuccessful;
 
-                    IsDocumentsCheckBoxChecked = DataProcessor.Parser.IsDocumentsEnabled;
-                    IsDocumentsCheckBoxEnabled = DataProcessor.Parser.IsDocumentsSupported;
+                        IsDocumentsCheckBoxChecked = DataProcessor.Parser.IsDocumentsEnabled;
+                        IsDocumentsCheckBoxEnabled = DataProcessor.Parser.IsDocumentsSupported && !DataProcessor.Parser.IsParseSuccessful;
+                    }
                 }
             });
 
@@ -63,8 +82,9 @@ namespace VkDataLoader.App
                 {
                     return;
                 }
-
+                ChangeAllCheckBoxesIsEnabled(false);
                 IsParserInProgress = true;
+                IsParseLinksButtonEnabled = false;
                 List<string> itemsToLoad = new();
                 if (IsImagesCheckBoxChecked)
                 {
@@ -76,6 +96,7 @@ namespace VkDataLoader.App
                 }
                 await DataProcessor.ParseItems(itemsToLoad);
                 IsParserInProgress = false;
+                ParseStatusSymbol = Symbol.Accept;
             });
         }
 
@@ -182,9 +203,13 @@ namespace VkDataLoader.App
             set
             {
                 SetProperty(ref isParserInProgress, value);
-                IsParseLinksButtonEnabled = !isParserInProgress;
-                ChangeAllCheckBoxesIsEnabled(!isParserInProgress);
             }
+        }
+
+        public Symbol ParseStatusSymbol
+        {
+            get => parseStatus;
+            set => SetProperty(ref parseStatus, value);
         }
 
         public void ChangeAllCheckBoxesIsEnabled(bool enabled)

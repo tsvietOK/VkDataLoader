@@ -46,6 +46,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
 
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -150,14 +151,26 @@
                 Margin="10,10"
                 Maximum="{x:Bind ViewModel.DataProcessor.Parser.HtmlFilesCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 Value="{x:Bind ViewModel.DataProcessor.Parser.CurrentHtmlFileNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBlock
-                x:Name="ParseLinksStatTextBlock"
+            <SymbolIcon
+                x:Name="ParseStatus"
                 Grid.Row="2"
                 Grid.Column="3"
-                Margin="20"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Text="{x:Bind ViewModel.DataProcessor.Parser.VkDataItems.Count, Mode=OneWay}" />
+                Symbol="{x:Bind ViewModel.ParseStatusSymbol, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <StackPanel
+                Grid.Row="3"
+                Grid.Column="2"
+                Orientation="Horizontal">
+                <TextBlock
+                    Margin="20,5,5,5"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Text="Links:" />
+                <TextBlock
+                    x:Name="LinksCountTextBlock"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Text="{x:Bind ViewModel.DataProcessor.Parser.LinksCount, Mode=OneWay}" />
+            </StackPanel>
             <!--<ListView
                 Grid.Row="4"
                 Grid.Column="1"

@@ -13,13 +13,16 @@ namespace VkDataLoader
         {
             configFilePath = Path.Combine(folderPath, configFileName);
             IsVkFolder = File.Exists(Path.Combine(folderPath, "index.html"));
-            if (!TryLoadConfiguration(folderPath))
+            IsConfigurationLoaded = TryLoadConfiguration(folderPath);
+            if (!IsConfigurationLoaded)
             {
                 dataProcessor = IsVkFolder ? new VkDataProcessor(folderPath, this) : null;
             }
         }
 
         public bool IsVkFolder { get; set; }
+
+        public bool IsConfigurationLoaded { get; set; }
 
         public VkDataProcessor? GetVkDataProcessor() => dataProcessor;
 

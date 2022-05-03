@@ -19,6 +19,8 @@ namespace VkDataLoader
         private bool isDocumentsEnabled;
         private bool isImagesSupported = true;
         private bool isDocumentsSupported;
+        private int linksCount;
+        private bool isParseSuccessful;
 
         public LinksParser(string vkFolderPath)
         {
@@ -71,6 +73,18 @@ namespace VkDataLoader
             set => SetProperty(ref currentHtmlFileNumber, value);
         }
 
+        public int LinksCount
+        {
+            get => linksCount;
+            set => SetProperty(ref linksCount, value);
+        }
+
+        public bool IsParseSuccessful
+        {
+            get => isParseSuccessful;
+            set => SetProperty(ref isParseSuccessful, value);
+        }
+
         public ObservableCollection<string> HtmlFilesList
         {
             get => htmlFilesList;
@@ -99,9 +113,10 @@ namespace VkDataLoader
                     if (stopwatch.ElapsedMilliseconds > REFRESH_INTERVAL)
                     {
                         CurrentHtmlFileNumber = i;
+                        LinksCount = VkDataItems.Count;
                         stopwatch.Restart();
                     }
-                    
+
                     string file = HtmlFilesList[i];
                     using var reader = File.OpenText(file);
                     var text = await reader.ReadToEndAsync();
@@ -109,8 +124,10 @@ namespace VkDataLoader
                 }
 
                 CurrentHtmlFileNumber = HtmlFilesList.Count;
+                LinksCount = VkDataItems.Count;
                 stopwatch.Stop();
             }
+            IsParseSuccessful = true;
         }
 
         public void SetFolderPath(string path)
