@@ -9,6 +9,7 @@ namespace VkDataLoader
 {
     public class LinksParser : ObservableObject
     {
+        private const int REFRESH_INTERVAL = 100;
         private string vkFolderPath;
         private ObservableCollection<VkDataItem> vkDataItems = new();
         private ObservableCollection<string> htmlFilesList = new();
@@ -96,7 +97,7 @@ namespace VkDataLoader
                 stopwatch.Start();
                 for (int i = 0; i < HtmlFilesList.Count; i++)
                 {
-                    if (stopwatch.ElapsedMilliseconds > 100)
+                    if (stopwatch.ElapsedMilliseconds > REFRESH_INTERVAL)
                     {
                         CurrentHtmlFileNumber = i;
                         stopwatch.Restart();
