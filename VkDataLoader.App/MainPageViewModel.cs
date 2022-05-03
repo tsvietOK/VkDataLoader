@@ -25,7 +25,6 @@ namespace VkDataLoader.App
         private VkDataProcessorFactory processorFactory;
         private VkDataProcessor dataProcessor;
         private bool isSelectFolderButtonEnabled = true;
-        private bool isParserInProgress;
         private bool isImagesCheckBoxEnabled;
         private bool isDocumentsCheckBoxEnabled;
         private bool isImagesCheckBoxChecked;
@@ -117,12 +116,6 @@ namespace VkDataLoader.App
             set => SetProperty(ref isSelectFolderButtonEnabled, value);
         }
 
-        public bool IsParserInProgress
-        {
-            get => isParserInProgress;
-            set => SetProperty(ref isParserInProgress, value);
-        }
-
         public Symbol ParseStatusSymbol
         {
             get => parseStatus;
@@ -202,7 +195,6 @@ namespace VkDataLoader.App
             }
 
             ChangeAllCheckBoxesIsEnabled(false);
-            IsParserInProgress = true;
             IsParseLinksButtonEnabled = false;
 
             List<string> itemsToLoad = new();
@@ -216,7 +208,6 @@ namespace VkDataLoader.App
             }
             await DataProcessor.ParseItems(itemsToLoad);
 
-            IsParserInProgress = false;
             ParseStatusSymbol = Symbol.Accept;
             IsDownloadButtonEnabled = true;
         }
