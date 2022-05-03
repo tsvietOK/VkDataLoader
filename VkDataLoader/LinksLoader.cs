@@ -8,6 +8,7 @@ namespace VkDataLoader
 {
     public class LinksLoader : ObservableObject
     {
+        private const int MILLISECONDS_DELAY = 500;
         private readonly VkDataProcessorFactory processorFactory;
         private HttpClient httpClient;
         private int currentDownloadedItem;
@@ -53,7 +54,7 @@ namespace VkDataLoader
 
                 processorFactory.SaveConfiguration();
                 CurrentDownloadedItem = i;
-                await Task.Delay(500);
+                await Task.Delay(MILLISECONDS_DELAY);
             }
 
             httpClient.Dispose();
