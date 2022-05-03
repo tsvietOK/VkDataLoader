@@ -4,15 +4,26 @@ namespace VkDataLoader
 {
     public class VkDataProcessorFactory
     {
-        private const string configFileName = "config.json";
+        private const string CONFIG_FILE_NAME = "config.json";
+        private const string APPLICATION_FOLDER = "VkDataLoader";
         private readonly string configFilePath;
 
         private VkDataProcessor? dataProcessor;
 
         public VkDataProcessorFactory(string folderPath)
         {
-            configFilePath = Path.Combine(folderPath, configFileName);
+            configFilePath = Path.Combine(folderPath, APPLICATION_FOLDER, CONFIG_FILE_NAME);
             IsVkFolder = File.Exists(Path.Combine(folderPath, "index.html"));
+            if (!IsVkFolder)
+            {
+                return;
+            }
+
+            if (!Directory.Exists(Path.Combine(folderPath, APPLICATION_FOLDER)))
+            {
+                Directory.CreateDirectory(Path.Combine(folderPath, APPLICATION_FOLDER));
+            }
+
             IsConfigurationLoaded = TryLoadConfiguration(folderPath);
             if (!IsConfigurationLoaded)
             {
