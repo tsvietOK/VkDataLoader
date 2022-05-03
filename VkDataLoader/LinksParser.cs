@@ -94,7 +94,6 @@ namespace VkDataLoader
 
                 HtmlFilesList = parser.GetHtmlFilesList(vkFolderPath);
                 Stopwatch stopwatch = Stopwatch.StartNew();
-                stopwatch.Start();
                 for (int i = 0; i < HtmlFilesList.Count; i++)
                 {
                     if (stopwatch.ElapsedMilliseconds > REFRESH_INTERVAL)
