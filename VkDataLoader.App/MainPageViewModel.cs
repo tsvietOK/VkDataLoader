@@ -19,7 +19,6 @@ namespace VkDataLoader.App
     internal class MainPageViewModel : ObservableObject
     {
         private string selectedFolderPath;
-        private bool isVkFolder;
         private Symbol folderStatus;
         private bool isTipOpen;
         private bool isParseLinksButtonEnabled;
@@ -36,7 +35,6 @@ namespace VkDataLoader.App
         public MainPageViewModel()
         {
             SelectFolderCommand = new RelayCommand(async () => await SelectFolder());
-
             ParseLinksCommand = new RelayCommand(async () => await ParseLinks());
         }
 
