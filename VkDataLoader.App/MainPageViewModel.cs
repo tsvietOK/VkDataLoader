@@ -48,30 +48,39 @@ namespace VkDataLoader.App
                     SelectedFolderPath = folder.Path;
                     processorFactory = new VkDataProcessorFactory(SelectedFolderPath);
 
-                    IsVkFolder = processorFactory.IsVkFolder;
                     DataProcessor = processorFactory.GetVkDataProcessor();
-
-                    if (processorFactory.IsConfigurationLoaded)
+                    if (processorFactory.IsVkFolder)
                     {
-                        if (DataProcessor.Parser.IsParseSuccessful)
+                        FolderStatus = Symbol.Accept;
+                        IsSelectFolderButtonEnabled = false;
+
+                        if (processorFactory.IsConfigurationLoaded)
                         {
-                            ParseStatusSymbol = Symbol.Accept;
-                            IsParseLinksButtonEnabled = false;
-                            ChangeAllCheckBoxesIsEnabled(false);
+                            if (DataProcessor.Parser.IsParseSuccessful)
+                            {
+                                ParseStatusSymbol = Symbol.Accept;
+                                IsParseLinksButtonEnabled = false;
+                                ChangeAllCheckBoxesIsEnabled(false);
+                            }
+                            else
+                            {
+                                ParseStatusSymbol = Symbol.Cancel;
+                                IsParseLinksButtonEnabled = IsImagesCheckBoxChecked || IsDocumentsCheckBoxChecked;
+                            }
                         }
                         else
                         {
-                            ParseStatusSymbol = Symbol.Cancel;
-                            IsParseLinksButtonEnabled = IsImagesCheckBoxChecked || IsDocumentsCheckBoxChecked;
+                            IsImagesCheckBoxChecked = DataProcessor.Parser.IsImagesEnabled;
+                            IsImagesCheckBoxEnabled = DataProcessor.Parser.IsImagesSupported && !DataProcessor.Parser.IsParseSuccessful;
+
+                            IsDocumentsCheckBoxChecked = DataProcessor.Parser.IsDocumentsEnabled;
+                            IsDocumentsCheckBoxEnabled = DataProcessor.Parser.IsDocumentsSupported && !DataProcessor.Parser.IsParseSuccessful;
                         }
                     }
                     else
                     {
-                        IsImagesCheckBoxChecked = DataProcessor.Parser.IsImagesEnabled;
-                        IsImagesCheckBoxEnabled = DataProcessor.Parser.IsImagesSupported && !DataProcessor.Parser.IsParseSuccessful;
-
-                        IsDocumentsCheckBoxChecked = DataProcessor.Parser.IsDocumentsEnabled;
-                        IsDocumentsCheckBoxEnabled = DataProcessor.Parser.IsDocumentsSupported && !DataProcessor.Parser.IsParseSuccessful;
+                        FolderStatus = Symbol.Cancel;
+                        IsTipOpen = true;
                     }
                 }
             });
@@ -114,29 +123,6 @@ namespace VkDataLoader.App
         {
             get => selectedFolderPath;
             set => SetProperty(ref selectedFolderPath, value);
-        }
-
-        public bool IsVkFolder
-        {
-            get => isVkFolder;
-            set
-            {
-                SetProperty(ref isVkFolder, value);
-
-                if (isVkFolder)
-                {
-                    FolderStatus = Symbol.Accept;
-                    IsParseLinksButtonEnabled = true;
-                    IsSelectFolderButtonEnabled = false;
-                    ChangeAllCheckBoxesIsEnabled(true);
-                    CheckAtLeastOneCheckBoxChecked();
-                }
-                else
-                {
-                    FolderStatus = Symbol.Cancel;
-                    IsTipOpen = true;
-                }
-            }
         }
 
         public Symbol FolderStatus
