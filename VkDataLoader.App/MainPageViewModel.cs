@@ -135,45 +135,47 @@ namespace VkDataLoader.App
 
             picker.FileTypeFilter.Add("*");
             var folder = await picker.PickSingleFolderAsync();
-            if (folder != null)
+            if (folder == null)
             {
-                SelectedFolderPath = folder.Path;
-                processorFactory = new VkDataProcessorFactory(SelectedFolderPath);
+                return;
+            }
 
-                DataProcessor = processorFactory.GetVkDataProcessor();
-                if (processorFactory.IsVkFolder)
+            SelectedFolderPath = folder.Path;
+            processorFactory = new VkDataProcessorFactory(SelectedFolderPath);
+
+            DataProcessor = processorFactory.GetVkDataProcessor();
+            if (processorFactory.IsVkFolder)
+            {
+                FolderStatus = Symbol.Accept;
+                IsSelectFolderButtonEnabled = false;
+
+                if (processorFactory.IsConfigurationLoaded)
                 {
-                    FolderStatus = Symbol.Accept;
-                    IsSelectFolderButtonEnabled = false;
-
-                    if (processorFactory.IsConfigurationLoaded)
+                    if (DataProcessor.Parser.IsParseSuccessful)
                     {
-                        if (DataProcessor.Parser.IsParseSuccessful)
-                        {
-                            ParseStatusSymbol = Symbol.Accept;
-                            IsParseLinksButtonEnabled = false;
-                            ChangeAllCheckBoxesIsEnabled(false);
-                        }
-                        else
-                        {
-                            ParseStatusSymbol = Symbol.Cancel;
-                            IsParseLinksButtonEnabled = IsImagesCheckBoxChecked || IsDocumentsCheckBoxChecked;
-                        }
+                        ParseStatusSymbol = Symbol.Accept;
+                        IsParseLinksButtonEnabled = false;
+                        ChangeAllCheckBoxesIsEnabled(false);
                     }
                     else
                     {
-                        IsImagesCheckBoxChecked = DataProcessor.Parser.IsImagesEnabled;
-                        IsImagesCheckBoxEnabled = DataProcessor.Parser.IsImagesSupported && !DataProcessor.Parser.IsParseSuccessful;
-
-                        IsDocumentsCheckBoxChecked = DataProcessor.Parser.IsDocumentsEnabled;
-                        IsDocumentsCheckBoxEnabled = DataProcessor.Parser.IsDocumentsSupported && !DataProcessor.Parser.IsParseSuccessful;
+                        ParseStatusSymbol = Symbol.Cancel;
+                        IsParseLinksButtonEnabled = IsImagesCheckBoxChecked || IsDocumentsCheckBoxChecked;
                     }
                 }
                 else
                 {
-                    FolderStatus = Symbol.Cancel;
-                    IsTipOpen = true;
+                    IsImagesCheckBoxChecked = DataProcessor.Parser.IsImagesEnabled;
+                    IsImagesCheckBoxEnabled = DataProcessor.Parser.IsImagesSupported && !DataProcessor.Parser.IsParseSuccessful;
+
+                    IsDocumentsCheckBoxChecked = DataProcessor.Parser.IsDocumentsEnabled;
+                    IsDocumentsCheckBoxEnabled = DataProcessor.Parser.IsDocumentsSupported && !DataProcessor.Parser.IsParseSuccessful;
                 }
+            }
+            else
+            {
+                FolderStatus = Symbol.Cancel;
+                IsTipOpen = true;
             }
         }
 
@@ -183,9 +185,11 @@ namespace VkDataLoader.App
             {
                 return;
             }
+
             ChangeAllCheckBoxesIsEnabled(false);
             IsParserInProgress = true;
             IsParseLinksButtonEnabled = false;
+
             List<string> itemsToLoad = new();
             if (IsImagesCheckBoxChecked)
             {
@@ -196,9 +200,11 @@ namespace VkDataLoader.App
                 itemsToLoad.Add("documents");
             }
             await DataProcessor.ParseItems(itemsToLoad);
+
             IsParserInProgress = false;
             ParseStatusSymbol = Symbol.Accept;
         }
+
         public void ChangeAllCheckBoxesIsEnabled(bool enabled)
         {
             IsImagesCheckBoxEnabled = enabled;
