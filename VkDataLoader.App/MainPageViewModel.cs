@@ -35,78 +35,9 @@ namespace VkDataLoader.App
 
         public MainPageViewModel()
         {
-            SelectFolderCommand = new RelayCommand(async () =>
-            {
-                FolderPicker picker = new();
-                // workaround for Invalid window handle https://stackoverflow.com/questions/57161258/invalid-window-handle-error-when-using-fileopenpicker-from-c-sharp-net-framwo
-                picker.As<IInitializeWithWindow>().Initialize(Process.GetCurrentProcess().MainWindowHandle);
+            SelectFolderCommand = new RelayCommand(async () => await SelectFolder());
 
-                picker.FileTypeFilter.Add("*");
-                var folder = await picker.PickSingleFolderAsync();
-                if (folder != null)
-                {
-                    SelectedFolderPath = folder.Path;
-                    processorFactory = new VkDataProcessorFactory(SelectedFolderPath);
-
-                    DataProcessor = processorFactory.GetVkDataProcessor();
-                    if (processorFactory.IsVkFolder)
-                    {
-                        FolderStatus = Symbol.Accept;
-                        IsSelectFolderButtonEnabled = false;
-
-                        if (processorFactory.IsConfigurationLoaded)
-                        {
-                            if (DataProcessor.Parser.IsParseSuccessful)
-                            {
-                                ParseStatusSymbol = Symbol.Accept;
-                                IsParseLinksButtonEnabled = false;
-                                ChangeAllCheckBoxesIsEnabled(false);
-                            }
-                            else
-                            {
-                                ParseStatusSymbol = Symbol.Cancel;
-                                IsParseLinksButtonEnabled = IsImagesCheckBoxChecked || IsDocumentsCheckBoxChecked;
-                            }
-                        }
-                        else
-                        {
-                            IsImagesCheckBoxChecked = DataProcessor.Parser.IsImagesEnabled;
-                            IsImagesCheckBoxEnabled = DataProcessor.Parser.IsImagesSupported && !DataProcessor.Parser.IsParseSuccessful;
-
-                            IsDocumentsCheckBoxChecked = DataProcessor.Parser.IsDocumentsEnabled;
-                            IsDocumentsCheckBoxEnabled = DataProcessor.Parser.IsDocumentsSupported && !DataProcessor.Parser.IsParseSuccessful;
-                        }
-                    }
-                    else
-                    {
-                        FolderStatus = Symbol.Cancel;
-                        IsTipOpen = true;
-                    }
-                }
-            });
-
-            ParseLinksCommand = new RelayCommand(async () =>
-            {
-                if (DataProcessor is null)
-                {
-                    return;
-                }
-                ChangeAllCheckBoxesIsEnabled(false);
-                IsParserInProgress = true;
-                IsParseLinksButtonEnabled = false;
-                List<string> itemsToLoad = new();
-                if (IsImagesCheckBoxChecked)
-                {
-                    itemsToLoad.Add("images");
-                }
-                if (IsDocumentsCheckBoxChecked)
-                {
-                    itemsToLoad.Add("documents");
-                }
-                await DataProcessor.ParseItems(itemsToLoad);
-                IsParserInProgress = false;
-                ParseStatusSymbol = Symbol.Accept;
-            });
+            ParseLinksCommand = new RelayCommand(async () => await ParseLinks());
         }
 
         public VkDataProcessor DataProcessor
@@ -198,6 +129,78 @@ namespace VkDataLoader.App
             set => SetProperty(ref parseStatus, value);
         }
 
+        private async Task SelectFolder()
+        {
+            FolderPicker picker = new();
+            // workaround for Invalid window handle https://stackoverflow.com/questions/57161258/invalid-window-handle-error-when-using-fileopenpicker-from-c-sharp-net-framwo
+            picker.As<IInitializeWithWindow>().Initialize(Process.GetCurrentProcess().MainWindowHandle);
+
+            picker.FileTypeFilter.Add("*");
+            var folder = await picker.PickSingleFolderAsync();
+            if (folder != null)
+            {
+                SelectedFolderPath = folder.Path;
+                processorFactory = new VkDataProcessorFactory(SelectedFolderPath);
+
+                DataProcessor = processorFactory.GetVkDataProcessor();
+                if (processorFactory.IsVkFolder)
+                {
+                    FolderStatus = Symbol.Accept;
+                    IsSelectFolderButtonEnabled = false;
+
+                    if (processorFactory.IsConfigurationLoaded)
+                    {
+                        if (DataProcessor.Parser.IsParseSuccessful)
+                        {
+                            ParseStatusSymbol = Symbol.Accept;
+                            IsParseLinksButtonEnabled = false;
+                            ChangeAllCheckBoxesIsEnabled(false);
+                        }
+                        else
+                        {
+                            ParseStatusSymbol = Symbol.Cancel;
+                            IsParseLinksButtonEnabled = IsImagesCheckBoxChecked || IsDocumentsCheckBoxChecked;
+                        }
+                    }
+                    else
+                    {
+                        IsImagesCheckBoxChecked = DataProcessor.Parser.IsImagesEnabled;
+                        IsImagesCheckBoxEnabled = DataProcessor.Parser.IsImagesSupported && !DataProcessor.Parser.IsParseSuccessful;
+
+                        IsDocumentsCheckBoxChecked = DataProcessor.Parser.IsDocumentsEnabled;
+                        IsDocumentsCheckBoxEnabled = DataProcessor.Parser.IsDocumentsSupported && !DataProcessor.Parser.IsParseSuccessful;
+                    }
+                }
+                else
+                {
+                    FolderStatus = Symbol.Cancel;
+                    IsTipOpen = true;
+                }
+            }
+        }
+
+        private async Task ParseLinks()
+        {
+            if (DataProcessor is null)
+            {
+                return;
+            }
+            ChangeAllCheckBoxesIsEnabled(false);
+            IsParserInProgress = true;
+            IsParseLinksButtonEnabled = false;
+            List<string> itemsToLoad = new();
+            if (IsImagesCheckBoxChecked)
+            {
+                itemsToLoad.Add("images");
+            }
+            if (IsDocumentsCheckBoxChecked)
+            {
+                itemsToLoad.Add("documents");
+            }
+            await DataProcessor.ParseItems(itemsToLoad);
+            IsParserInProgress = false;
+            ParseStatusSymbol = Symbol.Accept;
+        }
         public void ChangeAllCheckBoxesIsEnabled(bool enabled)
         {
             IsImagesCheckBoxEnabled = enabled;
