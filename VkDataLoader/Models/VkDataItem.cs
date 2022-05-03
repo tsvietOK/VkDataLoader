@@ -8,8 +8,6 @@ namespace VkDataLoader.Models
 
         public VkDataType DataType { get; set; }
 
-        public bool IsDownloaded { get; set; }
-
-        public bool IsDownloadFailed { get; set; }
+        public VkDataDownloadStatus DownloadStatus { get; set; }
     }
 }

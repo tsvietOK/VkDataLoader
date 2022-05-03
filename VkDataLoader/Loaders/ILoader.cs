@@ -2,6 +2,6 @@
 {
     internal interface ILoader
     {
-        Task LoadAsync(HttpClient client, string url, int i);
+        Task<bool> TryLoadAsync(HttpClient client, string url, int suffix);
     }
 }

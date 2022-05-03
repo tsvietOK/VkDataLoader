@@ -215,8 +215,9 @@ namespace VkDataLoader.App
         private async Task Download()
         {
             DownloadStatusSymbol = Symbol.Download;
+            IsDownloadButtonEnabled = false;
 
-
+            await DataProcessor.LoadParsedItems();
 
             DownloadStatusSymbol = Symbol.Accept;
         }

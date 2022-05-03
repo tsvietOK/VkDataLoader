@@ -22,11 +22,19 @@
 
         public LinksParser Parser { get; set; }
 
+        public LinksLoader Loader { get; set; }
+
         public async Task ParseItems(List<string> itemsToLoad)
         {
             Parser.Reset();
             await Parser.ParseAsync(itemsToLoad);
             vkDataProcessorFactory.SaveConfiguration();
+        }
+
+        public async Task LoadParsedItems()
+        {
+            Loader = new LinksLoader(vkDataProcessorFactory);
+            await Loader.LoadAsync(Parser.VkDataItems);
         }
     }
 }

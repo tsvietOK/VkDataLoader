@@ -35,7 +35,7 @@ namespace VkDataLoader.Parsers
                 var dataItem = new VkDataItem
                 {
                     Url = href,
-                    DataType = VkDataType.Image
+                    DataType = VkDataType.VK_DATA_IMAGE
                 };
 
                 vkDataItems.Add(dataItem);

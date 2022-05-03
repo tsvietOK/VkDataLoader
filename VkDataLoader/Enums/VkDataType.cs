@@ -2,7 +2,7 @@
 {
     public enum VkDataType
     {
-        Image,
-        Document
+        VK_DATA_IMAGE,
+        VK_DATA_DOCUMENT,
     }
 }
