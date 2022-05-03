@@ -171,6 +171,33 @@
                     VerticalAlignment="Center"
                     Text="{x:Bind ViewModel.DataProcessor.Parser.LinksCount, Mode=OneWay}" />
             </StackPanel>
+            <TextBlock
+                x:Name="DownloadTextBlock"
+                Grid.Row="4"
+                Grid.Column="0"
+                Margin="20"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Text="Download selected data:" />
+            <Button
+                x:Name="DownloadButton"
+                Grid.Row="4"
+                Grid.Column="1"
+                Margin="10,10"
+                HorizontalAlignment="Stretch"
+                Command="{x:Bind ViewModel.DownloadCommand}"
+                Content="Download"
+                IsEnabled="{x:Bind ViewModel.IsDownloadButtonEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Style="{StaticResource AccentButtonStyle}" />
+            <ProgressBar
+                Grid.Row="4"
+                Grid.Column="2"
+                Margin="10,10" />
+            <SymbolIcon
+                x:Name="DownloadStatus"
+                Grid.Row="4"
+                Grid.Column="3"
+                Symbol="{x:Bind ViewModel.DownloadStatusSymbol, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <!--<ListView
                 Grid.Row="4"
                 Grid.Column="1"

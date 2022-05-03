@@ -31,11 +31,14 @@ namespace VkDataLoader.App
         private bool isImagesCheckBoxChecked;
         private bool isDocumentsCheckBoxChecked;
         private Symbol parseStatus;
+        private bool isDownloadButtonEnabled;
+        private Symbol downloadStatusSymbol;
 
         public MainPageViewModel()
         {
             SelectFolderCommand = new RelayCommand(async () => await SelectFolder());
             ParseLinksCommand = new RelayCommand(async () => await ParseLinks());
+            DownloadCommand = new RelayCommand(async () => await Download());
         }
 
         public VkDataProcessor DataProcessor
@@ -47,6 +50,8 @@ namespace VkDataLoader.App
         public RelayCommand SelectFolderCommand { get; set; }
 
         public RelayCommand ParseLinksCommand { get; set; }
+
+        public RelayCommand DownloadCommand { get; set; }
 
         public string SelectedFolderPath
         {
@@ -115,16 +120,25 @@ namespace VkDataLoader.App
         public bool IsParserInProgress
         {
             get => isParserInProgress;
-            set
-            {
-                SetProperty(ref isParserInProgress, value);
-            }
+            set => SetProperty(ref isParserInProgress, value);
         }
 
         public Symbol ParseStatusSymbol
         {
             get => parseStatus;
             set => SetProperty(ref parseStatus, value);
+        }
+
+        public bool IsDownloadButtonEnabled
+        {
+            get => isDownloadButtonEnabled;
+            set => SetProperty(ref isDownloadButtonEnabled, value);
+        }
+
+        public Symbol DownloadStatusSymbol
+        {
+            get => downloadStatusSymbol;
+            set => SetProperty(ref downloadStatusSymbol, value);
         }
 
         private async Task SelectFolder()
@@ -156,6 +170,7 @@ namespace VkDataLoader.App
                         ParseStatusSymbol = Symbol.Accept;
                         IsParseLinksButtonEnabled = false;
                         ChangeAllCheckBoxesIsEnabled(false);
+                        IsDownloadButtonEnabled = true;
                     }
                     else
                     {
@@ -203,6 +218,16 @@ namespace VkDataLoader.App
 
             IsParserInProgress = false;
             ParseStatusSymbol = Symbol.Accept;
+            IsDownloadButtonEnabled = true;
+        }
+
+        private async Task Download()
+        {
+            DownloadStatusSymbol = Symbol.Download;
+
+
+
+            DownloadStatusSymbol = Symbol.Accept;
         }
 
         public void ChangeAllCheckBoxesIsEnabled(bool enabled)
