@@ -1,6 +1,7 @@
 ﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using VkDataLoader.Models;
 using VkDataLoader.Parsers;
 
@@ -91,14 +92,24 @@ namespace VkDataLoader
                 };
 
                 HtmlFilesList = parser.GetHtmlFilesList(vkFolderPath);
+                Stopwatch stopwatch = Stopwatch.StartNew();
+                stopwatch.Start();
                 for (int i = 0; i < HtmlFilesList.Count; i++)
                 {
-                    CurrentHtmlFileNumber = i;
+                    if (stopwatch.ElapsedMilliseconds > 100)
+                    {
+                        CurrentHtmlFileNumber = i;
+                        stopwatch.Restart();
+                    }
+                    
                     string file = HtmlFilesList[i];
                     using var reader = File.OpenText(file);
                     var text = await reader.ReadToEndAsync();
                     parser.GetLinksFromHtml(VkDataItems, text);
                 }
+
+                CurrentHtmlFileNumber = HtmlFilesList.Count;
+                stopwatch.Stop();
             }
         }
 
