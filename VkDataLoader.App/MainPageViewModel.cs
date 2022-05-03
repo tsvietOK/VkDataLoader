@@ -32,12 +32,17 @@ namespace VkDataLoader.App
         private Symbol parseStatus;
         private bool isDownloadButtonEnabled;
         private Symbol downloadStatusSymbol;
+        private bool isCheckVkConnectionButtonEnabled;
+        private Symbol checkVkConnectionSymbol;
+        private bool isConnectionAvailable;
+        private string connectionStatusString = "Status: Needs to be checked";
 
         public MainPageViewModel()
         {
             SelectFolderCommand = new RelayCommand(async () => await SelectFolder());
             ParseLinksCommand = new RelayCommand(async () => await ParseLinks());
             DownloadCommand = new RelayCommand(async () => await Download());
+            CheckVkConnectionCommand = new RelayCommand(async () => await CheckVkConnection());
         }
 
         public VkDataProcessor DataProcessor
@@ -51,6 +56,8 @@ namespace VkDataLoader.App
         public RelayCommand ParseLinksCommand { get; set; }
 
         public RelayCommand DownloadCommand { get; set; }
+
+        public RelayCommand CheckVkConnectionCommand { get; set; }
 
         public string SelectedFolderPath
         {
@@ -122,6 +129,34 @@ namespace VkDataLoader.App
             set => SetProperty(ref parseStatus, value);
         }
 
+        public bool IsCheckVkConnectionButtonEnabled
+        {
+            get => isCheckVkConnectionButtonEnabled;
+            set => SetProperty(ref isCheckVkConnectionButtonEnabled, value);
+        }
+
+        public Symbol CheckVkConnectionSymbol
+        {
+            get => checkVkConnectionSymbol;
+            set => SetProperty(ref checkVkConnectionSymbol, value);
+        }
+
+        public bool IsConnectionAvailable
+        {
+            get => isConnectionAvailable;
+            set
+            {
+                SetProperty(ref isConnectionAvailable, value);
+                ConnectionStatusString = value ? "Status: Available" : "Status: Unavailable";
+            }
+        }
+
+        public string ConnectionStatusString
+        {
+            get => connectionStatusString;
+            set => SetProperty(ref connectionStatusString, value);
+        }
+
         public bool IsDownloadButtonEnabled
         {
             get => isDownloadButtonEnabled;
@@ -163,7 +198,7 @@ namespace VkDataLoader.App
                         ParseStatusSymbol = Symbol.Accept;
                         IsParseLinksButtonEnabled = false;
                         ChangeAllCheckBoxesIsEnabled(false);
-                        IsDownloadButtonEnabled = true;
+                        IsCheckVkConnectionButtonEnabled = true;
                     }
                     else
                     {
@@ -209,7 +244,22 @@ namespace VkDataLoader.App
             await DataProcessor.ParseItems(itemsToLoad);
 
             ParseStatusSymbol = Symbol.Accept;
-            IsDownloadButtonEnabled = true;
+            IsCheckVkConnectionButtonEnabled = true;
+        }
+
+        private async Task CheckVkConnection()
+        {
+            IsConnectionAvailable = await VkConnectionChecker.IsConnectionAvailableAsync();
+            if (IsConnectionAvailable)
+            {
+                IsCheckVkConnectionButtonEnabled = false;
+                IsDownloadButtonEnabled = true;
+                CheckVkConnectionSymbol = Symbol.Accept;
+            }
+            else
+            {
+                CheckVkConnectionSymbol = Symbol.Cancel;
+            }
         }
 
         private async Task Download()
