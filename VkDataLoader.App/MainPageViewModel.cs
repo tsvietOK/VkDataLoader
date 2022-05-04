@@ -209,16 +209,13 @@ namespace VkDataLoader.App
                 {
                     if (DataProcessor.Parser.IsParseSuccessful)
                     {
-                        ParseStatusSymbol = Symbol.Accept;
-                        IsParseLinksButtonEnabled = false;
-                        ChangeAllCheckBoxesIsEnabled(false);
-                        IsCheckVkConnectionButtonEnabled = true;
-                        DataProcessor.Loader.LinksCount = DataProcessor.Parser.LinksCount;
+                        PreParseLinks();
+                        await PostParseLinksAsync();
                     }
                     else
                     {
                         ParseStatusSymbol = Symbol.Cancel;
-                        IsParseLinksButtonEnabled = IsImagesCheckBoxChecked || IsDocumentsCheckBoxChecked;
+                        CheckAtLeastOneCheckBoxChecked();
                     }
                 }
                 else
@@ -234,6 +231,12 @@ namespace VkDataLoader.App
             }
         }
 
+        private void PreParseLinks()
+        {
+            IsParseLinksButtonEnabled = false;
+            ChangeAllCheckBoxesIsEnabled(false);
+        }
+
         private async Task ParseLinks()
         {
             if (DataProcessor is null)
@@ -241,8 +244,7 @@ namespace VkDataLoader.App
                 return;
             }
 
-            ChangeAllCheckBoxesIsEnabled(false);
-            IsParseLinksButtonEnabled = false;
+            PreParseLinks();
 
             List<string> itemsToLoad = new();
             if (IsImagesCheckBoxChecked)
@@ -255,9 +257,15 @@ namespace VkDataLoader.App
             }
             await DataProcessor.ParseItems(itemsToLoad);
 
+            await PostParseLinksAsync();
+        }
+
+        private async Task PostParseLinksAsync()
+        {
             ParseStatusSymbol = Symbol.Accept;
             IsCheckVkConnectionButtonEnabled = true;
             DataProcessor.Loader.LinksCount = DataProcessor.Parser.LinksCount;
+            await CheckVkConnection();
         }
 
         private async Task CheckVkConnection()
