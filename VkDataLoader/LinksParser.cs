@@ -24,7 +24,7 @@ namespace VkDataLoader
 
         public LinksParser(string vkFolderPath)
         {
-            this.vkFolderPath = vkFolderPath;
+            VkFolderPath = vkFolderPath;
         }
 
         public ObservableCollection<VkDataItem> VkDataItems
@@ -95,6 +95,12 @@ namespace VkDataLoader
             }
         }
 
+        public string VkFolderPath
+        {
+            get => vkFolderPath;
+            set => vkFolderPath = value;
+        }
+
         public async Task ParseAsync(List<string> itemsToLoad)
         {
             foreach (var item in itemsToLoad)
@@ -106,7 +112,7 @@ namespace VkDataLoader
                     _ => new ImageLinkParser(),
                 };
 
-                HtmlFilesList = parser.GetHtmlFilesList(vkFolderPath);
+                HtmlFilesList = parser.GetHtmlFilesList(VkFolderPath);
                 Stopwatch stopwatch = Stopwatch.StartNew();
                 for (int i = 0; i < HtmlFilesList.Count; i++)
                 {
@@ -132,7 +138,7 @@ namespace VkDataLoader
 
         public void SetFolderPath(string path)
         {
-            vkFolderPath = path;
+            VkFolderPath = path;
         }
 
         public void Reset()

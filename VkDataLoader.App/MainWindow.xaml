@@ -51,7 +51,7 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="0.8*" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="3*" />
                 <ColumnDefinition Width="0.8*" />
             </Grid.ColumnDefinitions>
@@ -233,6 +233,17 @@
                 Grid.Row="5"
                 Grid.Column="3"
                 Symbol="{x:Bind ViewModel.DownloadStatusSymbol, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Button
+                x:Name="OpenDataLocationButton"
+                Grid.Row="6"
+                Grid.Column="1"
+                Margin="10,10"
+                HorizontalAlignment="Stretch"
+                Command="{x:Bind ViewModel.OpenDataLocationCommand}"
+                Content="Open data location"
+                IsEnabled="{x:Bind ViewModel.IsOpenDataLocationButtonEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Style="{StaticResource AccentButtonStyle}" />
             <!--<ListView
                 Grid.Row="4"
                 Grid.Column="1"

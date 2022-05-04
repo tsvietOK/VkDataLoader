@@ -1,4 +1,6 @@
-﻿namespace VkDataLoader
+﻿using System.Diagnostics;
+
+namespace VkDataLoader
 {
     public class VkDataProcessor
     {
@@ -35,6 +37,14 @@
         {
             Loader = new LinksLoader(vkDataProcessorFactory);
             await Loader.LoadAsync(Parser.VkDataItems);
+        }
+
+        public void OpenFolder()
+        {
+            if (Directory.Exists(vkDataProcessorFactory.ApplicationFolderPath))
+            {
+                Process.Start("explorer.exe", vkDataProcessorFactory.ApplicationFolderPath);
+            }
         }
     }
 }

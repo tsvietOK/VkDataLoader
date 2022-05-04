@@ -12,7 +12,8 @@ namespace VkDataLoader
 
         public VkDataProcessorFactory(string folderPath)
         {
-            configFilePath = Path.Combine(folderPath, APPLICATION_FOLDER, CONFIG_FILE_NAME);
+            ApplicationFolderPath = Path.Combine(folderPath, APPLICATION_FOLDER);
+            configFilePath = Path.Combine(ApplicationFolderPath, CONFIG_FILE_NAME);
             IsVkFolder = File.Exists(Path.Combine(folderPath, "index.html"));
             if (!IsVkFolder)
             {
@@ -34,6 +35,8 @@ namespace VkDataLoader
         public bool IsVkFolder { get; set; }
 
         public bool IsConfigurationLoaded { get; set; }
+
+        public string ApplicationFolderPath { get; private set; }
 
         public VkDataProcessor? GetVkDataProcessor() => dataProcessor;
 

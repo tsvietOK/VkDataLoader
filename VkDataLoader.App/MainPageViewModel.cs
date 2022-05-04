@@ -36,6 +36,7 @@ namespace VkDataLoader.App
         private Symbol checkVkConnectionSymbol;
         private bool isConnectionAvailable;
         private string connectionStatusString = "Status: Needs to be checked";
+        private bool isOpenDataLocationButtonEnabled;
 
         public MainPageViewModel()
         {
@@ -43,6 +44,7 @@ namespace VkDataLoader.App
             ParseLinksCommand = new RelayCommand(async () => await ParseLinks());
             DownloadCommand = new RelayCommand(async () => await Download());
             CheckVkConnectionCommand = new RelayCommand(async () => await CheckVkConnection());
+            OpenDataLocationCommand = new RelayCommand(() => OpenDataLocation());
         }
 
         public VkDataProcessor DataProcessor
@@ -58,6 +60,8 @@ namespace VkDataLoader.App
         public RelayCommand DownloadCommand { get; set; }
 
         public RelayCommand CheckVkConnectionCommand { get; set; }
+
+        public RelayCommand OpenDataLocationCommand { get; set; }
 
         public string SelectedFolderPath
         {
@@ -169,6 +173,12 @@ namespace VkDataLoader.App
             set => SetProperty(ref downloadStatusSymbol, value);
         }
 
+        public bool IsOpenDataLocationButtonEnabled
+        {
+            get => isOpenDataLocationButtonEnabled;
+            set => SetProperty(ref isOpenDataLocationButtonEnabled, value);
+        }
+
         private async Task SelectFolder()
         {
             FolderPicker picker = new();
@@ -188,6 +198,7 @@ namespace VkDataLoader.App
             DataProcessor = processorFactory.GetVkDataProcessor();
             if (processorFactory.IsVkFolder)
             {
+                IsOpenDataLocationButtonEnabled = true;
                 FolderStatus = Symbol.Accept;
                 IsSelectFolderButtonEnabled = false;
 
@@ -270,6 +281,11 @@ namespace VkDataLoader.App
             await DataProcessor.LoadParsedItems();
 
             DownloadStatusSymbol = Symbol.Accept;
+        }
+
+        private void OpenDataLocation()
+        {
+            DataProcessor.OpenFolder();
         }
 
         public void ChangeAllCheckBoxesIsEnabled(bool enabled)
