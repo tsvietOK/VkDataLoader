@@ -15,6 +15,7 @@ namespace VkDataLoader
         private int skippedCount;
         private int errorCount;
         private int overallProgressCount;
+        private int linksCount;
 
         public LinksLoader(VkDataProcessorFactory processorFactory)
         {
@@ -43,6 +44,12 @@ namespace VkDataLoader
         {
             get => errorCount;
             set => SetProperty(ref errorCount, value);
+        }
+
+        public int LinksCount
+        {
+            get => linksCount;
+            set => SetProperty(ref linksCount, value);
         }
 
         public async Task LoadAsync(ObservableCollection<VkDataItem> vkDataItems)

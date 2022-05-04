@@ -213,6 +213,7 @@ namespace VkDataLoader.App
                         IsParseLinksButtonEnabled = false;
                         ChangeAllCheckBoxesIsEnabled(false);
                         IsCheckVkConnectionButtonEnabled = true;
+                        DataProcessor.Loader.LinksCount = DataProcessor.Parser.LinksCount;
                     }
                     else
                     {
@@ -256,6 +257,7 @@ namespace VkDataLoader.App
 
             ParseStatusSymbol = Symbol.Accept;
             IsCheckVkConnectionButtonEnabled = true;
+            DataProcessor.Loader.LinksCount = DataProcessor.Parser.LinksCount;
         }
 
         private async Task CheckVkConnection()

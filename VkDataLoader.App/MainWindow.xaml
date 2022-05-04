@@ -260,7 +260,7 @@
                     <TextBlock
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
-                        Text="{x:Bind ViewModel.DataProcessor.Parser.LinksCount, Mode=OneWay, FallbackValue=0}" />
+                        Text="{x:Bind ViewModel.DataProcessor.Loader.LinksCount, Mode=OneWay, FallbackValue=0}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock
