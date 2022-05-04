@@ -253,6 +253,14 @@
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Text="{x:Bind ViewModel.DataProcessor.Loader.OverallProgressCount, Mode=OneWay, FallbackValue=0}" />
+                    <TextBlock
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Text="/" />
+                    <TextBlock
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Text="{x:Bind ViewModel.DataProcessor.Parser.LinksCount, Mode=OneWay, FallbackValue=0}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock
