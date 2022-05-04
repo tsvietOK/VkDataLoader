@@ -202,6 +202,9 @@ namespace VkDataLoader.App
                 FolderStatus = Symbol.Accept;
                 IsSelectFolderButtonEnabled = false;
 
+                IsImagesCheckBoxChecked = DataProcessor.Parser.IsImagesEnabled;
+                IsDocumentsCheckBoxChecked = DataProcessor.Parser.IsDocumentsEnabled;
+
                 if (processorFactory.IsConfigurationLoaded)
                 {
                     if (DataProcessor.Parser.IsParseSuccessful)
@@ -219,10 +222,7 @@ namespace VkDataLoader.App
                 }
                 else
                 {
-                    IsImagesCheckBoxChecked = DataProcessor.Parser.IsImagesEnabled;
                     IsImagesCheckBoxEnabled = DataProcessor.Parser.IsImagesSupported && !DataProcessor.Parser.IsParseSuccessful;
-
-                    IsDocumentsCheckBoxChecked = DataProcessor.Parser.IsDocumentsEnabled;
                     IsDocumentsCheckBoxEnabled = DataProcessor.Parser.IsDocumentsSupported && !DataProcessor.Parser.IsParseSuccessful;
                 }
             }
