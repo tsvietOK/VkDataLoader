@@ -11,17 +11,38 @@ namespace VkDataLoader
         private const int MILLISECONDS_DELAY = 500;
         private readonly VkDataProcessorFactory processorFactory;
         private HttpClient httpClient;
-        private int currentDownloadedItem;
+        private int downloadedCount;
+        private int skippedCount;
+        private int errorCount;
+        private int overallProgressCount;
 
         public LinksLoader(VkDataProcessorFactory processorFactory)
         {
             this.processorFactory = processorFactory;
         }
 
-        public int CurrentDownloadedItem
+        public int OverallProgressCount
         {
-            get => currentDownloadedItem;
-            set => SetProperty(ref currentDownloadedItem, value);
+            get => overallProgressCount;
+            set => SetProperty(ref overallProgressCount, value);
+        }
+
+        public int DownloadedCount
+        {
+            get => downloadedCount;
+            set => SetProperty(ref downloadedCount, value);
+        }
+
+        public int SkippedCount
+        {
+            get => skippedCount;
+            set => SetProperty(ref skippedCount, value);
+        }
+
+        public int ErrorCount
+        {
+            get => errorCount;
+            set => SetProperty(ref errorCount, value);
         }
 
         public async Task LoadAsync(ObservableCollection<VkDataItem> vkDataItems)
@@ -29,9 +50,12 @@ namespace VkDataLoader
             httpClient = new HttpClient();
             for (int i = 0; i < vkDataItems.Count; i++)
             {
+                OverallProgressCount = i;
+
                 VkDataItem? item = vkDataItems[i];
                 if (item.DownloadStatus == VkDataDownloadStatus.VK_DATA_DOWNLOAD_STATUS_OK)
                 {
+                    SkippedCount++;
                     continue;
                 }
 
@@ -46,14 +70,15 @@ namespace VkDataLoader
                 if (downloadResult)
                 {
                     item.DownloadStatus = VkDataDownloadStatus.VK_DATA_DOWNLOAD_STATUS_OK;
+                    DownloadedCount++;
                 }
                 else
                 {
                     item.DownloadStatus = VkDataDownloadStatus.VK_DATA_DOWNLOAD_STATUS_ERROR;
+                    ErrorCount++;
                 }
 
                 processorFactory.SaveConfiguration();
-                CurrentDownloadedItem = i;
                 await Task.Delay(MILLISECONDS_DELAY);
             }
 

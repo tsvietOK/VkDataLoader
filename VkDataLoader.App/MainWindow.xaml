@@ -230,7 +230,7 @@
                 Grid.Column="2"
                 Margin="10,10"
                 Maximum="{x:Bind ViewModel.DataProcessor.Parser.LinksCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                Value="{x:Bind ViewModel.DataProcessor.Loader.CurrentDownloadedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                Value="{x:Bind ViewModel.DataProcessor.Loader.OverallProgressCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <SymbolIcon
                 x:Name="DownloadStatus"
                 Grid.Row="5"
@@ -242,17 +242,47 @@
                 Grid.Column="2"
                 Margin="0,-30,0,0"
                 HorizontalAlignment="Center"
-                Orientation="Horizontal">
-                <TextBlock
-                    Margin="5,0"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Center"
-                    Text="Downloaded:" />
-                <TextBlock
-                    x:Name="DownloadedTextBlock"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Text="{x:Bind ViewModel.DataProcessor.Loader.CurrentDownloadedItem, Mode=OneWay, FallbackValue=0}" />
+                Orientation="Vertical">
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                    <TextBlock
+                        Margin="5,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Text="Processed:" />
+                    <TextBlock
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Text="{x:Bind ViewModel.DataProcessor.Loader.OverallProgressCount, Mode=OneWay, FallbackValue=0}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                        Margin="5,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Text="Downloaded:" />
+                    <TextBlock
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Text="{x:Bind ViewModel.DataProcessor.Loader.DownloadedCount, Mode=OneWay, FallbackValue=0}" />
+                    <TextBlock
+                        Margin="5,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Text="Skipped:" />
+                    <TextBlock
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Text="{x:Bind ViewModel.DataProcessor.Loader.SkippedCount, Mode=OneWay, FallbackValue=0}" />
+                    <TextBlock
+                        Margin="5,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Text="Error:" />
+                    <TextBlock
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Text="{x:Bind ViewModel.DataProcessor.Loader.ErrorCount, Mode=OneWay, FallbackValue=0}" />
+                </StackPanel>
             </StackPanel>
 
             <Button
