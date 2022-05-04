@@ -9,7 +9,7 @@
             try
             {
                 using HttpClient client = new();
-                var response = await client.SendAsync(new HttpRequestMessage(HttpMethod.Head, VK_URL));
+                var response = await client.SendAsync(new HttpRequestMessage(HttpMethod.Get, VK_URL));
 
                 return response.IsSuccessStatusCode;
             }
