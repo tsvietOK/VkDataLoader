@@ -224,21 +224,24 @@
                 IsEnabled="{x:Bind ViewModel.IsDownloadButtonEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 Style="{StaticResource AccentButtonStyle}" />
             <ProgressBar
-                Grid.Row="5"
-                Grid.Column="2"
+                Grid.Row="6"
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
                 Margin="10,10"
                 Maximum="{x:Bind ViewModel.DataProcessor.Parser.LinksCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 Value="{x:Bind ViewModel.DataProcessor.Loader.OverallProgressCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <SymbolIcon
                 x:Name="DownloadStatus"
                 Grid.Row="5"
+                Grid.RowSpan="3"
                 Grid.Column="3"
                 Symbol="{x:Bind ViewModel.DownloadStatusSymbol, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
             <StackPanel
-                Grid.Row="6"
-                Grid.Column="2"
-                Margin="0,-30,0,0"
+                Grid.Row="7"
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Margin="0,0,0,0"
                 HorizontalAlignment="Center"
                 Opacity="0.5"
                 Orientation="Vertical"
@@ -285,10 +288,9 @@
 
             <Button
                 x:Name="OpenDataLocationButton"
-                Grid.Row="7"
-                Grid.Column="1"
+                Grid.Row="5"
+                Grid.Column="2"
                 Margin="10,20"
-                HorizontalAlignment="Stretch"
                 Command="{x:Bind ViewModel.OpenDataLocationCommand}"
                 Content="Open data location"
                 IsEnabled="{x:Bind ViewModel.IsOpenDataLocationButtonEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
