@@ -20,6 +20,8 @@ namespace VkDataLoader
         private VkDataProcessor(VkDataProcessorFactory processorFactory)
         {
             vkDataProcessorFactory = processorFactory;
+
+            Loader = new LinksLoader(vkDataProcessorFactory);
         }
 
         public LinksParser Parser { get; set; }
@@ -35,7 +37,6 @@ namespace VkDataLoader
 
         public async Task LoadParsedItems()
         {
-            Loader = new LinksLoader(vkDataProcessorFactory);
             await Loader.LoadAsync(Parser.VkDataItems);
         }
 
