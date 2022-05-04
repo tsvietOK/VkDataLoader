@@ -84,7 +84,7 @@ namespace VkLoader.App
             }
         }
 
-        bool TrySetMicaBackdrop()
+        private bool TrySetMicaBackdrop()
         {
             if (MicaController.IsSupported())
             {
@@ -100,9 +100,15 @@ namespace VkLoader.App
                 m_configurationSource.IsInputActive = true;
                 switch (((FrameworkElement)Content).ActualTheme)
                 {
-                    case ElementTheme.Dark: m_configurationSource.Theme = SystemBackdropTheme.Dark; break;
-                    case ElementTheme.Light: m_configurationSource.Theme = SystemBackdropTheme.Light; break;
-                    case ElementTheme.Default: m_configurationSource.Theme = SystemBackdropTheme.Default; break;
+                    case ElementTheme.Dark:
+                        m_configurationSource.Theme = SystemBackdropTheme.Dark;
+                        break;
+                    case ElementTheme.Light:
+                        m_configurationSource.Theme = SystemBackdropTheme.Light;
+                        break;
+                    case ElementTheme.Default:
+                        m_configurationSource.Theme = SystemBackdropTheme.Default;
+                        break;
                 }
 
                 m_micaController = new MicaController();
@@ -117,7 +123,7 @@ namespace VkLoader.App
             return false; // Mica is not supported on this system
         }
 
-        bool TrySetAcrylicBackdrop()
+        private bool TrySetAcrylicBackdrop()
         {
             if (DesktopAcrylicController.IsSupported())
             {
