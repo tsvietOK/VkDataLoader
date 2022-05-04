@@ -114,21 +114,23 @@ namespace VkDataLoader
 
                 HtmlFilesList = parser.GetHtmlFilesList(VkFolderPath);
                 Stopwatch stopwatch = Stopwatch.StartNew();
-                for (int i = 0; i < HtmlFilesList.Count; i++)
+                var progressLock = new object();
+                var tasks = HtmlFilesList.AsParallel().Select(file => Task.Run(async () =>
                 {
-                    if (stopwatch.ElapsedMilliseconds > REFRESH_INTERVAL)
-                    {
-                        CurrentHtmlFileNumber = i;
-                        LinksCount = VkDataItems.Count;
-                        stopwatch.Restart();
-                    }
-
-                    string file = HtmlFilesList[i];
                     using var reader = File.OpenText(file);
                     var text = await reader.ReadToEndAsync();
                     parser.GetLinksFromHtml(VkDataItems, text);
+                })).ToArray();
+                int n = 0;
+                while((n = tasks.Count(t=> t.Status == TaskStatus.Running)) > 0)
+                {
+                    if (stopwatch.ElapsedMilliseconds > REFRESH_INTERVAL)
+                    {
+                        CurrentHtmlFileNumber = tasks.Length - n;
+                        LinksCount = VkDataItems.Count;
+                        stopwatch.Restart();
+                    }
                 }
-
                 CurrentHtmlFileNumber = HtmlFilesList.Count;
                 LinksCount = VkDataItems.Count;
                 stopwatch.Stop();
