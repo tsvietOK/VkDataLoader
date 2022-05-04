@@ -47,6 +47,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
 
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -93,7 +94,7 @@
                 x:Name="SelectFolderButton"
                 Grid.Row="0"
                 Grid.Column="1"
-                Margin="10,10"
+                Margin="10,20"
                 HorizontalAlignment="Stretch"
                 Command="{x:Bind ViewModel.SelectFolderCommand}"
                 Content="Open"
@@ -139,7 +140,7 @@
                 x:Name="ParseLinksButton"
                 Grid.Row="2"
                 Grid.Column="1"
-                Margin="10,10"
+                Margin="10,20"
                 HorizontalAlignment="Stretch"
                 Command="{x:Bind ViewModel.ParseLinksCommand}"
                 Content="Parse"
@@ -159,9 +160,11 @@
             <StackPanel
                 Grid.Row="3"
                 Grid.Column="2"
+                Margin="0,-30,0,0"
+                HorizontalAlignment="Center"
                 Orientation="Horizontal">
                 <TextBlock
-                    Margin="10,0,5,5"
+                    Margin="5,0"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
                     Text="Links:" />
@@ -169,7 +172,7 @@
                     x:Name="LinksCountTextBlock"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
-                    Text="{x:Bind ViewModel.DataProcessor.Parser.LinksCount, Mode=OneWay}" />
+                    Text="{x:Bind ViewModel.DataProcessor.Parser.LinksCount, Mode=OneWay, FallbackValue=0}" />
             </StackPanel>
 
             <TextBlock
@@ -184,7 +187,7 @@
                 x:Name="CheckVkConnectionButton"
                 Grid.Row="4"
                 Grid.Column="1"
-                Margin="10,10"
+                Margin="10,20"
                 HorizontalAlignment="Stretch"
                 Command="{x:Bind ViewModel.CheckVkConnectionCommand}"
                 Content="Check"
@@ -216,7 +219,7 @@
                 x:Name="DownloadButton"
                 Grid.Row="5"
                 Grid.Column="1"
-                Margin="10,10"
+                Margin="10,20"
                 HorizontalAlignment="Stretch"
                 Command="{x:Bind ViewModel.DownloadCommand}"
                 Content="Download"
@@ -234,11 +237,29 @@
                 Grid.Column="3"
                 Symbol="{x:Bind ViewModel.DownloadStatusSymbol, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
+            <StackPanel
+                Grid.Row="6"
+                Grid.Column="2"
+                Margin="0,-30,0,0"
+                HorizontalAlignment="Center"
+                Orientation="Horizontal">
+                <TextBlock
+                    Margin="5,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Text="Downloaded:" />
+                <TextBlock
+                    x:Name="DownloadedTextBlock"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Text="{x:Bind ViewModel.DataProcessor.Loader.CurrentDownloadedItem, Mode=OneWay, FallbackValue=0}" />
+            </StackPanel>
+
             <Button
                 x:Name="OpenDataLocationButton"
-                Grid.Row="6"
+                Grid.Row="7"
                 Grid.Column="1"
-                Margin="10,10"
+                Margin="10,20"
                 HorizontalAlignment="Stretch"
                 Command="{x:Bind ViewModel.OpenDataLocationCommand}"
                 Content="Open data location"
