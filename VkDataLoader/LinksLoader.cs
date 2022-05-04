@@ -37,12 +37,12 @@ namespace VkDataLoader
 
                 ILoader loader = item.DataType switch
                 {
-                    VkDataType.VK_DATA_IMAGE => new ImageLoader(),
+                    VkDataType.VK_DATA_IMAGE => new ImageLoader(processorFactory.ApplicationFolderPath),
                     VkDataType.VK_DATA_DOCUMENT => throw new NotImplementedException(),
                     _ => throw new NotImplementedException(),
                 };
 
-                bool downloadResult = await loader.TryLoadAsync(httpClient, item.Url, i, processorFactory.ApplicationFolderPath);
+                bool downloadResult = await loader.TryLoadAsync(httpClient, item.Url, i);
                 if (downloadResult)
                 {
                     item.DownloadStatus = VkDataDownloadStatus.VK_DATA_DOWNLOAD_STATUS_OK;

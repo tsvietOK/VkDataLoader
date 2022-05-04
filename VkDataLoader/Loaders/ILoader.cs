@@ -2,6 +2,8 @@
 {
     internal interface ILoader
     {
-        Task<bool> TryLoadAsync(HttpClient client, string url, int suffix, string path);
+        string GetFolderName();
+
+        Task<bool> TryLoadAsync(HttpClient client, string url, int suffix);
     }
 }
