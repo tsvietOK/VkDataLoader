@@ -48,7 +48,7 @@ namespace VkLoader.App
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
             m_window = new MainWindow();
-            m_window.Title = "VkDattaLoader";
+            m_window.Title = "VkDataLoader";
             m_window.Activate();
         }
 
