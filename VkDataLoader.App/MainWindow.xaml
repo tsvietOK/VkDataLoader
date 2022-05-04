@@ -112,17 +112,16 @@
                 Grid.Row="1"
                 Grid.Column="1"
                 Grid.ColumnSpan="2"
+                Margin="10,10"
                 Orientation="Horizontal">
                 <CheckBox
                     x:Name="ImagesCheckbox"
-                    Margin="10,10"
                     HorizontalAlignment="Stretch"
                     Content="Images"
                     IsChecked="{x:Bind ViewModel.IsImagesCheckBoxChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     IsEnabled="{x:Bind ViewModel.IsImagesCheckBoxEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <CheckBox
                     x:Name="DocumentsCheckbox"
-                    Margin="10,10"
                     HorizontalAlignment="Stretch"
                     Content="Documents"
                     IsChecked="{x:Bind ViewModel.IsDocumentsCheckBoxChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -160,7 +159,7 @@
             <StackPanel
                 Grid.Row="3"
                 Grid.Column="2"
-                Margin="0,-30,0,0"
+                Margin="0,-40,0,0"
                 HorizontalAlignment="Center"
                 Orientation="Horizontal">
                 <TextBlock
