@@ -8,7 +8,7 @@
     xmlns:models="using:VkDataLoader.Models"
     mc:Ignorable="d">
 
-    <Grid Background="{StaticResource SystemControlAcrylicWindowBrush}">
+    <Grid>
         <Grid.Resources>
             <DataTemplate x:Key="VkDataListViewTemplate" x:DataType="models:VkDataItem">
                 <TextBlock
