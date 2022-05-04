@@ -50,12 +50,12 @@ namespace VkDataLoader
             httpClient = new HttpClient();
             for (int i = 0; i < vkDataItems.Count; i++)
             {
-                OverallProgressCount = i;
 
                 VkDataItem? item = vkDataItems[i];
                 if (item.DownloadStatus == VkDataDownloadStatus.VK_DATA_DOWNLOAD_STATUS_OK)
                 {
                     SkippedCount++;
+                    OverallProgressCount = i;
                     continue;
                 }
 
@@ -78,6 +78,7 @@ namespace VkDataLoader
                     ErrorCount++;
                 }
 
+                OverallProgressCount = i;
                 processorFactory.SaveConfiguration();
                 await Task.Delay(MILLISECONDS_DELAY);
             }
