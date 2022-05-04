@@ -2,12 +2,13 @@
 {
     internal class ImageLoader : ILoader
     {
-        public async Task<bool> TryLoadAsync(HttpClient client, string url, int suffix)
+        public async Task<bool> TryLoadAsync(HttpClient client, string url, int suffix, string path)
         {
             try
             {
                 using var stream = await client.GetStreamAsync(url);
-                using var fileStream = new FileStream($"./images/vk_image_{suffix}.jpg", FileMode.OpenOrCreate);
+                string downloadPath = Path.Combine(path, $"images/vk_image_{suffix}.jpg");
+                using var fileStream = new FileStream(downloadPath, FileMode.OpenOrCreate);
                 await stream.CopyToAsync(fileStream);
             }
             catch (Exception)

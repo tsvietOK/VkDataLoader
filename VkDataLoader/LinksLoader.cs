@@ -42,7 +42,7 @@ namespace VkDataLoader
                     _ => throw new NotImplementedException(),
                 };
 
-                bool downloadResult = await loader.TryLoadAsync(httpClient, item.Url, i);
+                bool downloadResult = await loader.TryLoadAsync(httpClient, item.Url, i, processorFactory.ApplicationFolderPath);
                 if (downloadResult)
                 {
                     item.DownloadStatus = VkDataDownloadStatus.VK_DATA_DOWNLOAD_STATUS_OK;
