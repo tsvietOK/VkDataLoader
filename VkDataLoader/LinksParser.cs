@@ -116,7 +116,7 @@ namespace VkDataLoader
                 Stopwatch stopwatch = Stopwatch.StartNew();
                 var progressLock = new object();
                 var tasks = new List<Task>();
-                for(int i= 0; i < HtmlFilesList.Count; i++)
+                for (int i = 0; i < HtmlFilesList.Count; i++)
                 {
                     var task = Task.Run(async () =>
                     {
@@ -127,7 +127,7 @@ namespace VkDataLoader
                     });
                 }
                 int n = 0;
-                while((n = tasks.Count(t=> t.Status == TaskStatus.Running)) > 0)
+                while ((n = tasks.Count(t => t.Status == TaskStatus.Running)) > 0)
                 {
                     if (stopwatch.ElapsedMilliseconds > REFRESH_INTERVAL)
                     {
