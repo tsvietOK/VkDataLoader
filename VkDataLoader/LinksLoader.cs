@@ -55,7 +55,7 @@ namespace VkDataLoader
                 if (item.DownloadStatus == VkDataDownloadStatus.VK_DATA_DOWNLOAD_STATUS_OK)
                 {
                     SkippedCount++;
-                    OverallProgressCount = i;
+                    OverallProgressCount++;
                     continue;
                 }
 
@@ -78,7 +78,7 @@ namespace VkDataLoader
                     ErrorCount++;
                 }
 
-                OverallProgressCount = i;
+                OverallProgressCount++;
                 processorFactory.SaveConfiguration();
                 await Task.Delay(MILLISECONDS_DELAY);
             }
