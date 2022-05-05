@@ -23,15 +23,15 @@
         </Grid.RowDefinitions>
 
         <Grid x:Name="AppTitleBar">
-            <!--<Image
+            <Image
                 Width="16"
                 Height="16"
                 Margin="8,0"
                 HorizontalAlignment="Left"
-                Source="Images/WindowIcon.png" />-->
+                Source="Assets/Square44x44Logo.altform-lightunplated_targetsize-16.png" />
             <TextBlock
                 x:Name="AppTitleTextBlock"
-                Margin="15,0,0,0"
+                Margin="32,0,0,0"
                 VerticalAlignment="Center"
                 Style="{StaticResource CaptionTextBlockStyle}"
                 Text="VkDataLoader"
