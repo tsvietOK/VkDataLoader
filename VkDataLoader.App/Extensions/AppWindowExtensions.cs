@@ -2,7 +2,7 @@
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 
-namespace VkLoader.App.Extensions
+namespace VkDataLoader.App.Extensions
 {
     public static class AppWindowExtensions
     {

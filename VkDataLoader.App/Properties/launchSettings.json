@@ -1,9 +1,9 @@
 {
   "profiles": {
-    "VkLoader.App (Package)": {
+    "VkDataLoader.App (Package)": {
       "commandName": "MsixPackage"
     },
-    "VkLoader.App (Unpackaged)": {
+    "VkDataLoader.App (Unpackaged)": {
       "commandName": "Project"
     }
   }

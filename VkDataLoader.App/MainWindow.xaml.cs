@@ -2,15 +2,14 @@
 using Microsoft.UI.Composition.SystemBackdrops;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
-using VkDataLoader.App;
-using VkLoader.App.Extensions;
+using VkDataLoader.App.Extensions;
 using Windows.Graphics;
 using WinRT;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace VkLoader.App
+namespace VkDataLoader.App
 {
 
     /// <summary>
