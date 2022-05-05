@@ -12,6 +12,8 @@
 		<EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
+		<PackageCertificateThumbprint>2EA72F45AF2440981A52DCD597DCFF312ECA4A63</PackageCertificateThumbprint>
+		<AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
 	</PropertyGroup>
 
 	<ItemGroup>
