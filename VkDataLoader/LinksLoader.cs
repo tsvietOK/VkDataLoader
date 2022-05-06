@@ -8,7 +8,7 @@ namespace VkDataLoader
 {
     public class LinksLoader : ObservableObject
     {
-        private const int MILLISECONDS_DELAY = 500;
+        private const int MILLISECONDS_DELAY = 200;
         private readonly VkDataProcessorFactory processorFactory;
         private HttpClient httpClient;
         private int downloadedCount;
