@@ -120,6 +120,18 @@
   <data name="CheckVkConnectionButton.Content" xml:space="preserve">
     <value>Check</value>
   </data>
+  <data name="CheckVkConnectionNoStatusTextBock.Text" xml:space="preserve">
+    <value>Needs to be checked</value>
+  </data>
+  <data name="CheckVkConnectionStatusSuccessfulTextBock.Text" xml:space="preserve">
+    <value>Successful</value>
+  </data>
+  <data name="CheckVkConnectionStatusTextBock.Text" xml:space="preserve">
+    <value>Status:</value>
+  </data>
+  <data name="CheckVkConnectionStatusUnsuccessfulTextBock.Text" xml:space="preserve">
+    <value>Unsuccessful</value>
+  </data>
   <data name="DocumentsCheckbox.Content" xml:space="preserve">
     <value>Documents</value>
   </data>

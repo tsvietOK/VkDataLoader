@@ -64,6 +64,7 @@
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center" />
             <TextBox
+                x:Name="SelectedFolderTextBox"
                 x:Uid="SelectedFolderTextBox"
                 Grid.Row="0"
                 Grid.Column="2"
@@ -79,8 +80,8 @@
             <TeachingTip
                 x:Uid="ToggleFolderTeachingTip"
                 IsOpen="{x:Bind ViewModel.IsTipOpen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                PreferredPlacement="Center"
-                Target="{Binding ElementName=SelectFolderTextBox}">
+                PreferredPlacement="Bottom"
+                Target="{Binding ElementName=SelectedFolderTextBox}">
                 <TeachingTip.IconSource>
                     <SymbolIconSource Symbol="Refresh" />
                 </TeachingTip.IconSource>
@@ -173,14 +174,28 @@
                 Command="{x:Bind ViewModel.CheckVkConnectionCommand}"
                 IsEnabled="{x:Bind ViewModel.IsCheckVkConnectionButtonEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 Style="{StaticResource AccentButtonStyle}" />
-            <TextBlock
-                x:Name="CheckVkConnectionStatusTextBock"
+            <StackPanel
                 Grid.Row="4"
                 Grid.Column="2"
                 Margin="20"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Text="{x:Bind ViewModel.ConnectionStatusString, Mode=OneWay}" />
+                Orientation="Horizontal"
+                Spacing="5">
+                <TextBlock x:Uid="CheckVkConnectionStatusTextBock" VerticalAlignment="Center" />
+                <TextBlock
+                    x:Uid="CheckVkConnectionNoStatusTextBock"
+                    VerticalAlignment="Center"
+                    Visibility="{x:Bind ViewModel.CheckVkConnectionNoStatusTextBockVisibility, Mode=OneWay}" />
+                <TextBlock
+                    x:Uid="CheckVkConnectionStatusSuccessfulTextBock"
+                    VerticalAlignment="Center"
+                    Visibility="{x:Bind ViewModel.CheckVkConnectionStatusSuccessfulTextBockVisibility, Mode=OneWay}" />
+                <TextBlock
+                    x:Uid="CheckVkConnectionStatusUnsuccessfulTextBock"
+                    VerticalAlignment="Center"
+                    Visibility="{x:Bind ViewModel.CheckVkConnectionStatusUnsuccessfulTextBockVisibility, Mode=OneWay}" />
+            </StackPanel>
+
             <SymbolIcon
                 Grid.Row="4"
                 Grid.Column="3"

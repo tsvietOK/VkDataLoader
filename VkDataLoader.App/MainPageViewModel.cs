@@ -1,5 +1,6 @@
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
@@ -37,6 +38,9 @@ namespace VkDataLoader.App
         private bool isConnectionAvailable;
         private string connectionStatusString = "Status: Needs to be checked";
         private bool isOpenDataLocationButtonEnabled;
+        private Visibility checkVkConnectionNoStatusTextBockVisibility = Visibility.Visible;
+        private Visibility checkVkConnectionStatusSuccessfulTextBockVisibility = Visibility.Collapsed;
+        private Visibility checkVkConnectionStatusUnsuccessfulTextBockVisibility = Visibility.Collapsed;
 
         public MainPageViewModel()
         {
@@ -151,14 +155,33 @@ namespace VkDataLoader.App
             set
             {
                 SetProperty(ref isConnectionAvailable, value);
-                ConnectionStatusString = value ? "Status: Available" : "Status: Unavailable";
+                if (value)
+                {
+                    CheckVkConnectionStatusSuccessfulTextBockVisibility = Visibility.Visible;
+                }
+                else
+                {
+                    CheckVkConnectionStatusUnsuccessfulTextBockVisibility = Visibility.Visible;
+                }
+
+                CheckVkConnectionNoStatusTextBockVisibility = Visibility.Collapsed;
             }
         }
 
-        public string ConnectionStatusString
+        public Visibility CheckVkConnectionNoStatusTextBockVisibility
         {
-            get => connectionStatusString;
-            set => SetProperty(ref connectionStatusString, value);
+            get => checkVkConnectionNoStatusTextBockVisibility;
+            set => SetProperty(ref checkVkConnectionNoStatusTextBockVisibility, value);
+        }
+        public Visibility CheckVkConnectionStatusSuccessfulTextBockVisibility
+        {
+            get => checkVkConnectionStatusSuccessfulTextBockVisibility;
+            set => SetProperty(ref checkVkConnectionStatusSuccessfulTextBockVisibility, value);
+        }
+        public Visibility CheckVkConnectionStatusUnsuccessfulTextBockVisibility
+        {
+            get => checkVkConnectionStatusUnsuccessfulTextBockVisibility;
+            set => SetProperty(ref checkVkConnectionStatusUnsuccessfulTextBockVisibility, value);
         }
 
         public bool IsDownloadButtonEnabled

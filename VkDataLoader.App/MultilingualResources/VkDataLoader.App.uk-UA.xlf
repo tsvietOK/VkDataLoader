@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="uk-UA" original="VKDATALOADER.APP/STRINGS/EN-US/RESOURCES.RESW" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.6921.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="VKDATALOADER.APP/STRINGS/EN-US/RESOURCES.RESW" datatype="resx">
+        <trans-unit id="CheckVkConnectionButton.Content" translate="yes" xml:space="preserve">
+          <source>Check</source>
+          <target state="translated">Перевірити</target>
+        </trans-unit>
+        <trans-unit id="DocumentsCheckbox.Content" translate="yes" xml:space="preserve">
+          <source>Documents</source>
+          <target state="translated">Документи</target>
+        </trans-unit>
+        <trans-unit id="DownloadButton.Content" translate="yes" xml:space="preserve">
+          <source>Download</source>
+          <target state="translated">Завантажити</target>
+        </trans-unit>
+        <trans-unit id="DownloadedTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Downloaded:</source>
+          <target state="translated">Завантажено:</target>
+        </trans-unit>
+        <trans-unit id="DownloadTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Download selected data:</source>
+          <target state="translated">Завантажити обрані дані:</target>
+        </trans-unit>
+        <trans-unit id="ErrorTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Error:</source>
+          <target state="translated">Помилок:</target>
+        </trans-unit>
+        <trans-unit id="ImagesCheckbox.Content" translate="yes" xml:space="preserve">
+          <source>Images</source>
+          <target state="translated">Зображення</target>
+        </trans-unit>
+        <trans-unit id="LinksTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Links:</source>
+          <target state="translated">Посилань:</target>
+        </trans-unit>
+        <trans-unit id="OpenDataLocationButton.Content" translate="yes" xml:space="preserve">
+          <source>Open data location</source>
+          <target state="translated">Відкрити розташування даних</target>
+        </trans-unit>
+        <trans-unit id="ParseLinksButton.Content" translate="yes" xml:space="preserve">
+          <source>Parse</source>
+          <target state="translated">Знайти</target>
+        </trans-unit>
+        <trans-unit id="ParseLinksTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Parse links:</source>
+          <target state="translated">Знайти посилання:</target>
+        </trans-unit>
+        <trans-unit id="ProcessedTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Processed:</source>
+          <target state="translated">Оброблено:</target>
+        </trans-unit>
+        <trans-unit id="SelectedFolderTextBox.PlaceholderText" translate="yes" xml:space="preserve">
+          <source>Please, select folder with index.html file inside.</source>
+          <target state="translated">Будь ласка, оберіть теку із index.html файлом всередині.</target>
+        </trans-unit>
+        <trans-unit id="SelectFolderButton.Content" translate="yes" xml:space="preserve">
+          <source>Open</source>
+          <target state="translated">Відкрити</target>
+        </trans-unit>
+        <trans-unit id="SelectFolderTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Select folder:</source>
+          <target state="translated">Оберіть теку:</target>
+        </trans-unit>
+        <trans-unit id="SkippedTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>Skipped:</source>
+          <target state="translated">Пропущено:</target>
+        </trans-unit>
+        <trans-unit id="ToggleFolderTeachingTip.Subtitle" translate="yes" xml:space="preserve">
+          <source>Please, select folder with index.html file inside.</source>
+          <target state="translated">Будь ласка, оберіть теку із index.html файлом всередині.</target>
+        </trans-unit>
+        <trans-unit id="ToggleFolderTeachingTip.Title" translate="yes" xml:space="preserve">
+          <source>Wrong folder!</source>
+          <target state="translated">Невірна тека!</target>
+        </trans-unit>
+        <trans-unit id="VkStatusTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>VK connection:</source>
+          <target state="translated">Підключення до VK:</target>
+        </trans-unit>
+        <trans-unit id="WhatYouWantTextBlock.Text" translate="yes" xml:space="preserve">
+          <source>What do you want to download?</source>
+          <target state="translated">Що ви бажаєте завантажити?</target>
+        </trans-unit>
+        <trans-unit id="CheckVkConnectionStatusSuccessfulTextBock.Text" translate="yes" xml:space="preserve">
+          <source>Successful</source>
+          <target state="translated">Успішне</target>
+        </trans-unit>
+        <trans-unit id="CheckVkConnectionStatusTextBock.Text" translate="yes" xml:space="preserve">
+          <source>Status:</source>
+          <target state="translated">Статус:</target>
+        </trans-unit>
+        <trans-unit id="CheckVkConnectionStatusUnsuccessfulTextBock.Text" translate="yes" xml:space="preserve">
+          <source>Unsuccessful</source>
+          <target state="translated">Неуспішне</target>
+        </trans-unit>
+        <trans-unit id="CheckVkConnectionNoStatusTextBock.Text" translate="yes" xml:space="preserve">
+          <source>Needs to be checked</source>
+          <target state="translated">Потребує перевірки</target>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>

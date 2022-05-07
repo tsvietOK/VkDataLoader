@@ -27,6 +27,9 @@
 		<Warning Text="$(MSBuildProjectFile) is Multilingual build enabled, but the Multilingual App Toolkit is unavailable during the build. If building with Visual Studio, please check to ensure that toolkit is properly installed." />
 	</Target>
 	<ItemGroup>
+		<None Remove="MultilingualResources\VkDataLoader.App.uk-UA.xlf" />
+	</ItemGroup>
+	<ItemGroup>
 		<Content Include="Assets\SplashScreen.scale-200.png" />
 		<Content Include="Assets\LockScreenLogo.scale-200.png" />
 		<Content Include="Assets\Square150x150Logo.scale-200.png" />
@@ -47,6 +50,9 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\VkDataLoader\VkDataLoader.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<XliffResource Include="MultilingualResources\VkDataLoader.App.uk-UA.xlf" />
 	</ItemGroup>
 	<ItemGroup>
 		<Content Update="Assets\Square44x44Logo.altform-lightunplated_targetsize-16.png">

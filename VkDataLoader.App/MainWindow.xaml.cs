@@ -17,7 +17,7 @@ namespace VkDataLoader.App
     /// </summary>
     public sealed partial class MainWindow : Window
     {
-        private MainPageViewModel ViewModel { get; set; } = new MainPageViewModel();
+        private MainPageViewModel ViewModel { get; set; }
 
         WindowsSystemDispatcherQueueHelper m_wsdqHelper; // See separate sample below for implementation
         MicaController m_micaController;
@@ -29,6 +29,7 @@ namespace VkDataLoader.App
 
         public MainWindow()
         {
+            ViewModel = new MainPageViewModel();
             this.InitializeComponent();
 
             ExtendsContentIntoTitleBar = true;

@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CheckVkConnectionButton.Content" xml:space="preserve">
+    <value>Перевірити</value>
+  </data>
+  <data name="DocumentsCheckbox.Content" xml:space="preserve">
+    <value>Документи</value>
+  </data>
+  <data name="DownloadButton.Content" xml:space="preserve">
+    <value>Завантажити</value>
+  </data>
+  <data name="DownloadedTextBlock.Text" xml:space="preserve">
+    <value>Завантажено:</value>
+  </data>
+  <data name="DownloadTextBlock.Text" xml:space="preserve">
+    <value>Завантажити обрані дані:</value>
+  </data>
+  <data name="ErrorTextBlock.Text" xml:space="preserve">
+    <value>Помилок:</value>
+  </data>
+  <data name="ImagesCheckbox.Content" xml:space="preserve">
+    <value>Зображення</value>
+  </data>
+  <data name="LinksTextBlock.Text" xml:space="preserve">
+    <value>Посилань:</value>
+  </data>
+  <data name="OpenDataLocationButton.Content" xml:space="preserve">
+    <value>Відкрити розташування даних</value>
+  </data>
+  <data name="ParseLinksButton.Content" xml:space="preserve">
+    <value>Знайти</value>
+  </data>
+  <data name="ParseLinksTextBlock.Text" xml:space="preserve">
+    <value>Знайти посилання:</value>
+  </data>
+  <data name="ProcessedTextBlock.Text" xml:space="preserve">
+    <value>Оброблено:</value>
+  </data>
+  <data name="SelectedFolderTextBox.PlaceholderText" xml:space="preserve">
+    <value>Будь ласка, оберіть теку із index.html файлом всередині.</value>
+  </data>
+  <data name="SelectFolderButton.Content" xml:space="preserve">
+    <value>Відкрити</value>
+  </data>
+  <data name="SelectFolderTextBlock.Text" xml:space="preserve">
+    <value>Оберіть теку:</value>
+  </data>
+  <data name="SkippedTextBlock.Text" xml:space="preserve">
+    <value>Пропущено:</value>
+  </data>
+  <data name="ToggleFolderTeachingTip.Subtitle" xml:space="preserve">
+    <value>Будь ласка, оберіть теку із index.html файлом всередині.</value>
+  </data>
+  <data name="ToggleFolderTeachingTip.Title" xml:space="preserve">
+    <value>Невірна тека!</value>
+  </data>
+  <data name="VkStatusTextBlock.Text" xml:space="preserve">
+    <value>Підключення до VK:</value>
+  </data>
+  <data name="WhatYouWantTextBlock.Text" xml:space="preserve">
+    <value>Що ви бажаєте завантажити?</value>
+  </data>
+  <data name="CheckVkConnectionStatusSuccessfulTextBock.Text" xml:space="preserve">
+    <value>Успішне</value>
+  </data>
+  <data name="CheckVkConnectionStatusTextBock.Text" xml:space="preserve">
+    <value>Статус:</value>
+  </data>
+  <data name="CheckVkConnectionStatusUnsuccessfulTextBock.Text" xml:space="preserve">
+    <value>Неуспішне</value>
+  </data>
+  <data name="CheckVkConnectionNoStatusTextBock.Text" xml:space="preserve">
+    <value>Потребує перевірки</value>
+  </data>
+</root>
