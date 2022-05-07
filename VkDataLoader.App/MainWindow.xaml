@@ -57,92 +57,80 @@
                 <ColumnDefinition Width="0.8*" />
             </Grid.ColumnDefinitions>
             <TextBlock
-                x:Name="SelectFolderTextBlock"
+                x:Uid="SelectFolderTextBlock"
                 Grid.Row="0"
                 Grid.Column="0"
                 Margin="20"
                 HorizontalAlignment="Right"
-                VerticalAlignment="Center"
-                Text="Select folder:" />
+                VerticalAlignment="Center" />
             <TextBox
-                x:Name="SelectFolderTextBox"
+                x:Uid="SelectedFolderTextBox"
                 Grid.Row="0"
                 Grid.Column="2"
                 Margin="10"
                 VerticalAlignment="Center"
                 IsEnabled="False"
-                PlaceholderText="Please, select folder with index.html file inside."
                 Text="{x:Bind ViewModel.SelectedFolderPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <SymbolIcon
-                x:Name="SelectedFolderIcon"
                 Grid.Row="0"
                 Grid.Column="3"
                 Symbol="{x:Bind ViewModel.FolderStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
             <TeachingTip
-                x:Name="ToggleFolderTeachingTip"
-                Title="Wrong folder!"
+                x:Uid="ToggleFolderTeachingTip"
                 IsOpen="{x:Bind ViewModel.IsTipOpen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 PreferredPlacement="Center"
-                Subtitle="Please, select folder with index.html file inside."
                 Target="{Binding ElementName=SelectFolderTextBox}">
                 <TeachingTip.IconSource>
                     <SymbolIconSource Symbol="Refresh" />
                 </TeachingTip.IconSource>
             </TeachingTip>
             <Button
-                x:Name="SelectFolderButton"
+                x:Uid="SelectFolderButton"
                 Grid.Row="0"
                 Grid.Column="1"
                 Margin="10,20"
                 HorizontalAlignment="Stretch"
                 Command="{x:Bind ViewModel.SelectFolderCommand}"
-                Content="Open"
                 IsEnabled="{x:Bind ViewModel.IsSelectFolderButtonEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 Style="{StaticResource AccentButtonStyle}" />
             <TextBlock
-                x:Name="WhatYouWantTextBlock"
+                x:Uid="WhatYouWantTextBlock"
                 Grid.Row="1"
                 Grid.Column="0"
                 Margin="20"
-                VerticalAlignment="Center"
-                Text="What do you want to download?" />
+                VerticalAlignment="Center" />
             <StackPanel
-                x:Name="CheckboxesStackPanel"
                 Grid.Row="1"
                 Grid.Column="1"
                 Grid.ColumnSpan="2"
                 Margin="10,10"
                 Orientation="Horizontal">
                 <CheckBox
-                    x:Name="ImagesCheckbox"
+                    x:Uid="ImagesCheckbox"
                     HorizontalAlignment="Stretch"
-                    Content="Images"
                     IsChecked="{x:Bind ViewModel.IsImagesCheckBoxChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     IsEnabled="{x:Bind ViewModel.IsImagesCheckBoxEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <CheckBox
-                    x:Name="DocumentsCheckbox"
+                    x:Uid="DocumentsCheckbox"
                     HorizontalAlignment="Stretch"
-                    Content="Documents"
                     IsChecked="{x:Bind ViewModel.IsDocumentsCheckBoxChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     IsEnabled="{x:Bind ViewModel.IsDocumentsCheckBoxEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
             <TextBlock
-                x:Name="ParseLinksTextBlock"
+                x:Uid="ParseLinksTextBlock"
                 Grid.Row="2"
                 Grid.Column="0"
                 Margin="20"
                 HorizontalAlignment="Right"
-                VerticalAlignment="Center"
-                Text="Parse links:" />
+                VerticalAlignment="Center" />
             <Button
-                x:Name="ParseLinksButton"
+                x:Uid="ParseLinksButton"
                 Grid.Row="2"
                 Grid.Column="1"
                 Margin="10,20"
                 HorizontalAlignment="Stretch"
                 Command="{x:Bind ViewModel.ParseLinksCommand}"
-                Content="Parse"
                 IsEnabled="{x:Bind ViewModel.IsParseLinksButtonEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 Style="{StaticResource AccentButtonStyle}" />
             <ProgressBar
@@ -152,7 +140,6 @@
                 Maximum="{x:Bind ViewModel.DataProcessor.Parser.HtmlFilesCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 Value="{x:Bind ViewModel.DataProcessor.Parser.CurrentHtmlFileNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <SymbolIcon
-                x:Name="ParseStatus"
                 Grid.Row="2"
                 Grid.Column="3"
                 Symbol="{x:Bind ViewModel.ParseStatusSymbol, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
@@ -164,31 +151,26 @@
                 Opacity="0.5"
                 Orientation="Horizontal">
                 <TextBlock
+                    x:Uid="LinksTextBlock"
                     Margin="5,0"
-                    VerticalAlignment="Center"
-                    Text="Links:" />
-                <TextBlock
-                    x:Name="LinksCountTextBlock"
-                    VerticalAlignment="Center"
-                    Text="{x:Bind ViewModel.DataProcessor.Parser.LinksCount, Mode=OneWay, FallbackValue=0}" />
+                    VerticalAlignment="Center" />
+                <TextBlock VerticalAlignment="Center" Text="{x:Bind ViewModel.DataProcessor.Parser.LinksCount, Mode=OneWay, FallbackValue=0}" />
             </StackPanel>
 
             <TextBlock
-                x:Name="VkStatusTextBlock"
+                x:Uid="VkStatusTextBlock"
                 Grid.Row="4"
                 Grid.Column="0"
                 Margin="20"
                 HorizontalAlignment="Right"
-                VerticalAlignment="Center"
-                Text="VK connection:" />
+                VerticalAlignment="Center" />
             <Button
-                x:Name="CheckVkConnectionButton"
+                x:Uid="CheckVkConnectionButton"
                 Grid.Row="4"
                 Grid.Column="1"
                 Margin="10,20"
                 HorizontalAlignment="Stretch"
                 Command="{x:Bind ViewModel.CheckVkConnectionCommand}"
-                Content="Check"
                 IsEnabled="{x:Bind ViewModel.IsCheckVkConnectionButtonEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 Style="{StaticResource AccentButtonStyle}" />
             <TextBlock
@@ -200,27 +182,24 @@
                 VerticalAlignment="Center"
                 Text="{x:Bind ViewModel.ConnectionStatusString, Mode=OneWay}" />
             <SymbolIcon
-                x:Name="VkConnectionStatus"
                 Grid.Row="4"
                 Grid.Column="3"
                 Symbol="{x:Bind ViewModel.CheckVkConnectionSymbol, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
             <TextBlock
-                x:Name="DownloadTextBlock"
+                x:Uid="DownloadTextBlock"
                 Grid.Row="5"
                 Grid.Column="0"
                 Margin="20"
                 HorizontalAlignment="Right"
-                VerticalAlignment="Center"
-                Text="Download selected data:" />
+                VerticalAlignment="Center" />
             <Button
-                x:Name="DownloadButton"
+                x:Uid="DownloadButton"
                 Grid.Row="5"
                 Grid.Column="1"
                 Margin="10,20"
                 HorizontalAlignment="Stretch"
                 Command="{x:Bind ViewModel.DownloadCommand}"
-                Content="Download"
                 IsEnabled="{x:Bind ViewModel.IsDownloadButtonEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 Style="{StaticResource AccentButtonStyle}" />
             <ProgressBar
@@ -231,7 +210,6 @@
                 Maximum="{x:Bind ViewModel.DataProcessor.Parser.LinksCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 Value="{x:Bind ViewModel.DataProcessor.Loader.OverallProgressCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <SymbolIcon
-                x:Name="DownloadStatus"
                 Grid.Row="5"
                 Grid.RowSpan="3"
                 Grid.Column="3"
@@ -248,10 +226,10 @@
                 Spacing="2">
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                     <TextBlock
+                        x:Uid="ProcessedTextBlock"
                         Margin="5,0"
                         VerticalAlignment="Center"
-                        Foreground="{ThemeResource TextFillColorSecondary}"
-                        Text="Processed:" />
+                        Foreground="{ThemeResource TextFillColorSecondary}" />
                     <TextBlock VerticalAlignment="Center" Text="{x:Bind ViewModel.DataProcessor.Loader.OverallProgressCount, Mode=OneWay, FallbackValue=0}" />
                     <TextBlock
                         HorizontalAlignment="Left"
@@ -261,38 +239,37 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock
+                        x:Uid="DownloadedTextBlock"
                         Margin="0,0,5,0"
-                        VerticalAlignment="Center"
-                        Text="Downloaded:" />
+                        VerticalAlignment="Center" />
                     <TextBlock
                         Margin="0,0,5,0"
                         VerticalAlignment="Center"
                         Text="{x:Bind ViewModel.DataProcessor.Loader.DownloadedCount, Mode=OneWay, FallbackValue=0}" />
                     <TextBlock VerticalAlignment="Center" Text="|" />
                     <TextBlock
+                        x:Uid="SkippedTextBlock"
                         Margin="5,0"
-                        VerticalAlignment="Center"
-                        Text="Skipped:" />
+                        VerticalAlignment="Center" />
                     <TextBlock
                         Margin="0,0,5,0"
                         VerticalAlignment="Center"
                         Text="{x:Bind ViewModel.DataProcessor.Loader.SkippedCount, Mode=OneWay, FallbackValue=0}" />
                     <TextBlock VerticalAlignment="Center" Text="|" />
                     <TextBlock
+                        x:Uid="ErrorTextBlock"
                         Margin="5,0"
-                        VerticalAlignment="Center"
-                        Text="Error:" />
+                        VerticalAlignment="Center" />
                     <TextBlock VerticalAlignment="Center" Text="{x:Bind ViewModel.DataProcessor.Loader.ErrorCount, Mode=OneWay, FallbackValue=0}" />
                 </StackPanel>
             </StackPanel>
 
             <Button
-                x:Name="OpenDataLocationButton"
+                x:Uid="OpenDataLocationButton"
                 Grid.Row="5"
                 Grid.Column="2"
                 Margin="10,20"
                 Command="{x:Bind ViewModel.OpenDataLocationCommand}"
-                Content="Open data location"
                 IsEnabled="{x:Bind ViewModel.IsOpenDataLocationButtonEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 Style="{StaticResource AccentButtonStyle}" />
             <!--<ListView
