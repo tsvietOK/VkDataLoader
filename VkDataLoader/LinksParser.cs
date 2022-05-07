@@ -116,14 +116,19 @@ namespace VkDataLoader
                 Stopwatch stopwatch = Stopwatch.StartNew();
                 var progressLock = new object();
                 var tasks = new List<Task>();
+                var parserLock = new object();
                 for (int i = 0; i < HtmlFilesList.Count; i++)
                 {
                     var task = Task.Run(async () =>
                     {
-                        var file = HtmlFilesList[i];
+                        int j = i;
+                        var file = HtmlFilesList[j];
                         using var reader = File.OpenText(file);
                         var text = await reader.ReadToEndAsync();
-                        parser.GetLinksFromHtml(VkDataItems, text);
+                        lock (parserLock)
+                        {
+                            parser.GetLinksFromHtml(VkDataItems, text);
+                        }
                     });
                 }
                 int n = 0;
