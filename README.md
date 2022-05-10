@@ -9,3 +9,5 @@ VkDataLoader is an app, that downloads data like pictures from all chats based o
 - Select unarchived folder
 - Make sure that connection to VK is available.
 - Press download
+
+![image](https://user-images.githubusercontent.com/20501502/167741714-536d2d79-b26e-4e6f-b593-f86a922a0665.png)
